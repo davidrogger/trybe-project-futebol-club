@@ -8,8 +8,9 @@ import { Response } from 'superagent';
 import {
   invalidUser1,
   invalidUser2,
-  invalidUser3
-} from './mockedData/LoginUsersMock';
+  invalidUser3,
+  authorizedValidUser,
+  unauthorizedValidUser } from './mockedData/LoginUsersMock';
 
 import { app } from '../app';
 import UserModel from '../database/models/UserModel';
@@ -38,4 +39,21 @@ describe('Route "/login"', () => {
       }));
     })
   })
+
+  describe('When all the fields are fulfilled', () => {
+    let response;
+    before(async () => {
+      stub(UserModel, 'findByPk').resolves()
+    });
+
+    describe('When the user is authorized', async () => {
+      response = await chai.request(app).post('/login').send(authorizedValidUser);
+      it('Should return status 200', () => {
+        expect(response).to.have.status(200)
+      })
+      it('Should give a token', () => {
+        expect(response.body.message).to.be.equal('valid-token')
+      })
+    })
+  });
 });
