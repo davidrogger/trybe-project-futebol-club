@@ -4,4 +4,12 @@ export const invalidUser3 = {};
 
 export const authorizedValidUser = { email: 'authorized@teste.com', password: 'teste' };
 
+export const validUserData = {
+  id: 1,
+  username: 'tester',
+  role: 'teste',
+  email: 'authorized@teste.com',
+  password: 'any-password-hashed'
+ }
+
 export const unauthorizedValidUser = { email: 'unauthorized@teste.com', password: 'teste' };

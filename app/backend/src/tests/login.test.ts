@@ -10,10 +10,14 @@ import {
   invalidUser2,
   invalidUser3,
   authorizedValidUser,
-  unauthorizedValidUser } from './mockedData/LoginUsersMock';
+  validUserData,
+} from './mockedData/LoginUsersMock';
 
 import { app } from '../app';
 import UserModel from '../database/models/UserModel';
+import IUser from '../interfaces/IUser.interface';
+import bCryptService from '../services/PasswordHash.service';
+import JwtService from '../services/Jwt.service';
 
 chai.use(chaiHttp);
 
@@ -41,18 +45,22 @@ describe('Route "/login"', () => {
   })
 
   describe('When all the fields are fulfilled', () => {
-    let response;
-    before(async () => {
-      stub(UserModel, 'findByPk').resolves()
-    });
+    let response: Response;
+    afterEach(() => sinon.restore());
 
     describe('When the user is authorized', async () => {
-      response = await chai.request(app).post('/login').send(authorizedValidUser);
+      beforeEach( async() => {
+        stub(UserModel, 'findOne').resolves(validUserData as UserModel);
+        stub(bCryptService, 'verify').returns(true);
+        stub(JwtService, 'generateToken').returns('valid-token');
+        response = await chai.request(app).post('/login').send(authorizedValidUser);
+      });
+      
       it('Should return status 200', () => {
         expect(response).to.have.status(200)
       })
       it('Should give a token', () => {
-        expect(response.body.message).to.be.equal('valid-token')
+        expect(response.body.token).to.be.equal('valid-token')
       })
     })
   });
