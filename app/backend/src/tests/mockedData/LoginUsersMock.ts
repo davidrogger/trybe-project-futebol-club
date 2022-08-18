@@ -10,6 +10,11 @@ export const validUserData = {
   role: 'teste',
   email: 'authorized@teste.com',
   password: 'any-password-hashed'
- }
+}
+
+export const validUserPayload = {
+  role: 'teste',
+  email: 'authorized@teste.com'
+}
 
 export const unauthorizedValidUser = { email: 'unauthorized@teste.com', password: 'wrongpassword' };
