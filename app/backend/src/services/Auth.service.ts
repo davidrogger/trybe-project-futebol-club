@@ -1,7 +1,7 @@
 import { IUserPayload } from '../interfaces/IUser.interface';
 import UserModel from '../database/models/UserModel';
 import IUserLogin from '../interfaces/IUserLogin';
-import bCryptService from './PasswordHash.service';
+import PasswordHash from './PasswordHash.service';
 import UnauthorizedError from '../errors/UnauthorizedError';
 
 class AuthService {
@@ -9,7 +9,7 @@ class AuthService {
     const userData = await UserModel.findOne({ where: { email } });
     if (!userData) throw new UnauthorizedError('Incorrect email or password');
     if (userData) {
-      const passwordCheck = bCryptService.verify(password, userData.password);
+      const passwordCheck = PasswordHash.verify(password, userData.password);
       if (!passwordCheck) throw new UnauthorizedError('Incorrect email or password');
     }
     const { role } = userData;

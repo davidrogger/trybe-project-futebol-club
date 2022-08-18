@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcryptjs';
 
-class bCryptService {
+class PasswordHash {
   static encrypt(password: string): string {
     return bcrypt.hashSync(password);
   }
@@ -10,4 +10,4 @@ class bCryptService {
   }
 }
 
-export default bCryptService;
+export default PasswordHash;
