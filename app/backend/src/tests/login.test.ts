@@ -25,7 +25,9 @@ chai.use(chaiHttp);
 const { expect } = chai;
 const { stub } = sinon;
 
-describe('post Route "/login"', () => {
+describe('Route "/login"', () => {
+  afterEach(() => sinon.restore());
+
   describe('When missing a field in the body request', () => {
     let response: Response;
     const userInvalidsLogin = [invalidUser1, invalidUser2, invalidUser3]
@@ -47,7 +49,6 @@ describe('post Route "/login"', () => {
 
   describe('When all the fields are fulfilled', () => {
     let response: Response;
-    afterEach(() => sinon.restore());
 
     describe('When the user is authorized', async () => {
       beforeEach( async() => {
@@ -92,20 +93,21 @@ describe('post Route "/login"', () => {
       })
     });
   });
+
+  describe('get Route /login/validate', () => {
+    let response: Response;
+    beforeEach(async () => {
+      stub(JwtService, 'verifyToken').returns(validUserPayload);
+      response = await chai.request(app).get('/login/validate').set('authorization', 'test-token');
+    });
+  
+    it('Should return the user role', () => {
+      expect(response.body.role).to.be.equal('teste')
+    });
+  
+    it('Should return status 200', () => {
+      expect(response).to.have.status(200);
+    })
+  });
 });
 
-describe('get Route /login/validate', () => {
-  let response: Response;
-  beforeEach(async () => {
-    response = await chai.request(app).get('/login/validate').set('authorization', 'test-token');
-    stub(JwtService, 'verifyToken').returns(validUserPayload);
-  });
-
-  it('Should return the user role', () => {
-    expect(response.body.role).to.be.equal('teste')
-  });
-
-  it('Should return status 200', () => {
-    expect(response).to.have.status(200);
-  })
-});
