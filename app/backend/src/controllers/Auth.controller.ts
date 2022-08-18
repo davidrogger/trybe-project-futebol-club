@@ -10,6 +10,12 @@ class AuthController {
     const token = JwtService.generateToken(userPayload);
     res.status(200).json({ token });
   }
+
+  static async userToken(req: Request, res: Response) {
+    const token = InputValidator.token(req.headers);
+    const { role } = JwtService.verifyToken(token);
+    res.status(200).json({ role });
+  }
 }
 
 export default AuthController;

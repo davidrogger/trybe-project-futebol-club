@@ -8,6 +8,7 @@ class AuthRoute {
     this.route = Router();
 
     this.route.post('/', AuthController.findUser);
+    this.route.get('/validate', AuthController.userToken);
   }
 }
 
