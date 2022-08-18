@@ -7,6 +7,7 @@ class TeamRoute {
   constructor() {
     this.route = Router();
     this.route.get('/', TeamController.getAll);
+    this.route.get('/:id', TeamController.getById);
   }
 }
 
