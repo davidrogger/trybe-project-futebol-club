@@ -1,5 +1,6 @@
 import { Model, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
+import TeamModel from './TeamModel';
 
 class MatchModel extends Model {
   id!: number;
@@ -49,5 +50,8 @@ MatchModel.init(
     tableName: 'matches',
   },
 );
+
+MatchModel.hasOne(TeamModel, { foreignKey: 'id', as: 'teamHome', sourceKey: 'homeTeam' });
+MatchModel.hasOne(TeamModel, { foreignKey: 'id', as: 'teamAway', sourceKey: 'awayTeam' });
 
 export default MatchModel;
