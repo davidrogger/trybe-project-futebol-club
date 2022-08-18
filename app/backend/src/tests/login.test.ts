@@ -11,11 +11,11 @@ import {
   invalidUser3,
   authorizedValidUser,
   validUserData,
+  unauthorizedValidUser,
 } from './mockedData/LoginUsersMock';
 
 import { app } from '../app';
 import UserModel from '../database/models/UserModel';
-import IUser from '../interfaces/IUser.interface';
 import bCryptService from '../services/PasswordHash.service';
 import JwtService from '../services/Jwt.service';
 
@@ -63,5 +63,32 @@ describe('Route "/login"', () => {
         expect(response.body.token).to.be.equal('valid-token')
       })
     })
+
+    describe('When the user is unauthorized by password', async () => {
+      beforeEach( async() => {
+        stub(UserModel, 'findOne').resolves();
+        stub(bCryptService, 'verify').returns(false);
+        response = await chai.request(app).post('/login').send(unauthorizedValidUser);
+      });
+      it('Should return status 401', () => {
+        expect(response).to.have.status(401);
+      });
+      it('Should return "Incorrect email or password"', async () => {
+        expect(response.body.message).to.be.equal('Incorrect email or password')
+      })
+    });
+
+    describe('When the user is unauthorized by email', async () => {
+      beforeEach( async() => {
+        stub(UserModel, 'findOne').resolves(null);
+        response = await chai.request(app).post('/login').send(unauthorizedValidUser);
+      });
+      it('Should return status 401', () => {
+        expect(response).to.have.status(401);
+      });
+      it('Should return "Incorrect email or password"', async () => {
+        expect(response.body.message).to.be.equal('Incorrect email or password')
+      })
+    });
   });
 });

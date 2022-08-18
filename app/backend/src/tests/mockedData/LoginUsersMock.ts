@@ -12,4 +12,4 @@ export const validUserData = {
   password: 'any-password-hashed'
  }
 
-export const unauthorizedValidUser = { email: 'unauthorized@teste.com', password: 'teste' };
+export const unauthorizedValidUser = { email: 'unauthorized@teste.com', password: 'wrongpassword' };
