@@ -1,7 +1,7 @@
 import * as sinon from 'sinon';
 import * as chai from 'chai';
-
-import chaiHttp from 'chai-http';
+// @ts-ignore
+import chaiHttp = require('chai-http');
 import { Response } from 'superagent';
 import { app } from '../app';
 
@@ -19,19 +19,19 @@ describe('route /teams', () => {
 
   describe('When use route "/teams"', () => {
     it('Should get all teams', async () => {
-      response = await chai.request(app).get('/teams');
       stub(TeamModel, 'findAll').resolves(mockedTeamList as TeamModel[]);
+      response = await chai.request(app).get('/teams');
       expect(response).to.have.status(200);
-      expect(response.body).to.be.equal(mockedTeamList);
+      expect(response.body).to.be.deep.equal(mockedTeamList);
     });
   });
 
   describe('When use route "/teams/id"', () => {
     it('Should get a team by its "id"', async () => {
-      response = await chai.request(app).get('/teams/1');
       stub(TeamModel, 'findByPk').resolves(mockedTeam as TeamModel);
+      response = await chai.request(app).get('/teams/1');
       expect(response).to.have.status(200);
-      expect(response).to.be.equal(mockedTeam);
+      expect(response.body).to.be.deep.equal(mockedTeam);
     });
   });
 })
