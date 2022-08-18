@@ -1,10 +1,5 @@
 'use strict';
 
-/**
- * @param {import('sequelize')} queryInterface
- * @param {import('sequelize')} Sequelize
- */
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('users', {
