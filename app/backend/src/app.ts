@@ -2,8 +2,10 @@ import * as express from 'express';
 import 'express-async-errors';
 import ErrorHandlerMiddleware from './middlewares/ErrorHandlerMiddleware';
 import AuthRoute from './routes/Auth.route';
+import TeamRoute from './routes/Team.route';
 
 const auth = new AuthRoute();
+const teams = new TeamRoute();
 class App {
   public app: express.Express;
 
@@ -16,6 +18,7 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
 
     this.app.use('/login', auth.route);
+    this.app.use('/teams', teams.route);
     this.app.use(ErrorHandlerMiddleware.response);
   }
 
