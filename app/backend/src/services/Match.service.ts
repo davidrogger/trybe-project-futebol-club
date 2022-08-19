@@ -3,7 +3,7 @@ import MatchModel from '../database/models/MatchModel';
 
 class MatchService {
   static async findMatches(inProgress: boolean | undefined): Promise<MatchModel[]> {
-    const filterApplied = inProgress ? { inProgress } : {};
+    const filterApplied = inProgress !== undefined ? { inProgress } : {};
     const matches = await MatchModel.findAll({
       where: filterApplied,
       include: [
