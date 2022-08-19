@@ -1,5 +1,6 @@
 import TeamModel from '../database/models/TeamModel';
 import MatchModel from '../database/models/MatchModel';
+import { InewMatch } from '../interfaces/Match.interface';
 
 class MatchService {
   static async findMatches(inProgress: boolean | undefined): Promise<MatchModel[]> {
@@ -16,6 +17,11 @@ class MatchService {
 
   static filter(progress: string): boolean {
     return progress === 'true';
+  }
+
+  static async add(newMatch: InewMatch): Promise<MatchModel> {
+    const match = await MatchModel.create(newMatch);
+    return match;
   }
 }
 

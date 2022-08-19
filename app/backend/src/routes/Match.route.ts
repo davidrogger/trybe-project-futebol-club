@@ -8,6 +8,7 @@ class MatchRoute {
     this.route = Router();
 
     this.route.get('/', MatchController.findMatches);
+    this.route.post('/', MatchController.add);
   }
 }
 

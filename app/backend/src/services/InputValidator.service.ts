@@ -4,6 +4,7 @@ import InvalidInputError from '../errors/InvalidInputError';
 import UnauthorizedError from '../errors/UnauthorizedError';
 import MissingFieldError from '../errors/MissingFieldError';
 import IUserLogin from '../interfaces/IUserLogin';
+import { InewMatch } from '../interfaces/Match.interface';
 
 class InputValidator {
   static login(userLogin: IUserLogin): IUserLogin {
@@ -23,6 +24,14 @@ class InputValidator {
     const numberData = Number.isNaN(numberId);
     if (numberData) throw new InvalidInputError('Id must be a number');
     return numberId;
+  }
+
+  static newMatch(match: InewMatch): InewMatch {
+    // if (Object.keys(match).length !== 4) {
+    //   throw new InvalidInputError('Number of Fields should be 4');
+    // }
+    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = match;
+    return { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals };
   }
 }
 
