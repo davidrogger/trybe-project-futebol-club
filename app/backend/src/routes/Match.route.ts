@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import AuthMiddleware from '../middlewares/Auth.middleware';
 import MatchController from '../controllers/Match.controller';
 
 class MatchRoute {
@@ -8,7 +9,7 @@ class MatchRoute {
     this.route = Router();
 
     this.route.get('/', MatchController.findMatches);
-    this.route.post('/', MatchController.add);
+    this.route.post('/', [AuthMiddleware.userToken, MatchController.add]);
   }
 }
 

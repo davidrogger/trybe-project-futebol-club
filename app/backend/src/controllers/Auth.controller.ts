@@ -11,9 +11,8 @@ class AuthController {
     res.status(200).json({ token });
   }
 
-  static async userToken(req: Request, res: Response) {
-    const token = InputValidator.token(req.headers);
-    const { role } = JwtService.verifyToken(token);
+  static async userRole(req: Request, res: Response) {
+    const { role } = res.locals;
     res.status(200).json({ role });
   }
 }

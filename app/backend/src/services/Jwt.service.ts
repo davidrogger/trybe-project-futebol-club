@@ -14,7 +14,7 @@ class JwtService {
       const userData = jwt.verify(token, secret);
       return userData as IUserPayload;
     } catch (error) {
-      throw new UnauthorizedError('Token invalid');
+      throw new UnauthorizedError('Token must be a valid token');
     }
   }
 }

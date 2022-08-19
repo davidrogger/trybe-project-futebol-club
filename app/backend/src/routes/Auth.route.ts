@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import AuthMiddleware from '../middlewares/Auth.middleware';
 import AuthController from '../controllers/Auth.controller';
 
 class AuthRoute {
@@ -8,7 +9,7 @@ class AuthRoute {
     this.route = Router();
 
     this.route.post('/', AuthController.findUser);
-    this.route.get('/validate', AuthController.userToken);
+    this.route.get('/validate', [AuthMiddleware.userToken, AuthController.userRole]);
   }
 }
 
