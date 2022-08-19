@@ -7,7 +7,7 @@ class MatchRoute {
   constructor() {
     this.route = Router();
 
-    this.route.get('/', MatchController.getAll);
+    this.route.get('/', MatchController.findMatches);
   }
 }
 
