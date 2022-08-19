@@ -1,3 +1,6 @@
+import { FindOptions, Model } from "sequelize";
+import MatchModel from "../../database/models/MatchModel";
+
 export interface IMatchModelAssociated {
   id: number,
   homeTeam: number,
@@ -13,7 +16,7 @@ export interface IMatchModelAssociated {
   }
 }
 
-export const matchListMocked: IMatchModelAssociated[] = [
+export const matchListMocked = [
   {
     "id": 1,
     "homeTeam": 16,
@@ -72,3 +75,10 @@ export const matchListMocked: IMatchModelAssociated[] = [
     }
 ]
 
+export async function mockFindOne(data: any): Promise<MatchModel[]> {
+  const { where } = data;
+    if (Object.values(where).length > 0) {
+      return matchListMocked.filter((match) => match.inProgress === where.inProgress) as unknown as MatchModel[];
+    }
+  return matchListMocked as unknown as MatchModel[];
+}

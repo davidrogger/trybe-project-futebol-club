@@ -6,8 +6,7 @@ import { Response } from 'superagent';
 import { app } from '../app';
 
 import MatchModel from '../database/models/MatchModel';
-import { matchListMocked } from './mockedData/matchesMock';
-import { IMatchModelAssociated } from './mockedData/matchesMock';
+import { matchListMocked, IMatchModelAssociated, mockFindOne } from './mockedData/matchesMock';
 
 chai.use(chaiHttp);
 
@@ -20,7 +19,7 @@ describe('route /matches', () => {
 
   describe('When route /matches is called whitout a query filter', () => {
     beforeEach(async () => {
-      stub(MatchModel, 'findAll').resolves(matchListMocked as unknown as MatchModel[]);
+      stub(MatchModel, 'findAll').callsFake(mockFindOne);
       response = await chai.request(app).get('/matches');
     })
     
@@ -34,7 +33,7 @@ describe('route /matches', () => {
 
   describe('When route /matches is called with a query filter true', () => {
     beforeEach(async () => {
-      stub(MatchModel, 'findAll').resolves(matchListMocked as unknown as MatchModel[]);
+      stub(MatchModel, 'findAll').callsFake(mockFindOne);
       response = await chai.request(app).get('/matches?inProgress=true');
     })
 
@@ -44,14 +43,14 @@ describe('route /matches', () => {
     it('Should return a list with just the matches inProgress true', () => {
       const matchesInProgress: IMatchModelAssociated[] = response.body;
       matchesInProgress.forEach((match) => {
-        expect(match.inProgress).to.be.equal('true');
+        expect(match.inProgress).to.be.equal(true);
       });
     });
   });
 
   describe('When route /matches is called with a query filter false', () => {
     beforeEach(async () => {
-      stub(MatchModel, 'findAll').resolves(matchListMocked as unknown as MatchModel[]);
+      stub(MatchModel, 'findAll').callsFake(mockFindOne);
       response = await chai.request(app).get('/matches?inProgress=false');
     })
     it('Should return response 200', () => {
@@ -60,7 +59,7 @@ describe('route /matches', () => {
     it('Should return a list with just the matches inProgress false', () => {
       const matchesInProgress: IMatchModelAssociated[] = response.body;
       matchesInProgress.forEach((match) => {
-        expect(match.inProgress).to.be.equal('false');
+        expect(match.inProgress).to.be.equal(false);
       });
     });
   })
