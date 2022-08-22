@@ -27,10 +27,11 @@ class InputValidator {
   }
 
   static newMatch(match: InewMatch): InewMatch {
-    // if (Object.keys(match).length !== 4) {
-    //   throw new InvalidInputError('Number of Fields should be 4');
-    // }
     const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = match;
+    if (homeTeam === awayTeam) {
+      throw new UnauthorizedError('It is not possible to create a match with two equal teams');
+    }
+
     return { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals };
   }
 }
