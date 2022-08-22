@@ -1,5 +1,3 @@
-import { match } from "assert";
-import { FindOptions, Model } from "sequelize";
 import MatchModel from "../../database/models/MatchModel";
 
 export interface IMatchModelAssociated {
@@ -79,6 +77,13 @@ export const matchListMocked: IMatchModelAssociated[] = [
 export const newMatchTest = {
   "homeTeam": 16,
   "awayTeam": 8,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2
+};
+
+export const notAllowMatchTeam = {
+  "homeTeam": 1,
+  "awayTeam": 1,
   "homeTeamGoals": 2,
   "awayTeamGoals": 2
 };

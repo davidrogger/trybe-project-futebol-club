@@ -9,6 +9,7 @@ import MatchModel from '../database/models/MatchModel';
 import {
   newMatchTest,
   mockCreate,
+  notAllowMatchTeam,
 } from './mockedData/matchesMock';
 import { validUserPayload } from './mockedData/LoginUsersMock';
 import JwtService from '../services/Jwt.service';
@@ -64,6 +65,28 @@ describe('route /matches', () => {
         expect(newMatchData.inProgress).to.be.true;
       });
 
+    });
+
+    describe('When the teams in a match are the same', () => {
+      before(async () => {
+        stub(JwtService, 'verifyToken').returns(validUserPayload);
+        stub(MatchModel, 'create').callsFake(mockCreate);
+        response = await chai
+          .request(app)
+          .post('/matches')
+          .set('authorization', 'test-token')
+          .send(notAllowMatchTeam);
+      });
+
+      it('Should response status 401', () => {
+        expect(response).to.have.status(401);
+      });
+
+      it('Should response message "It is not possible to create a \
+      match with two equal teams"', () => {
+        expect(response.body.message).to.be.equal('It is not possible to create a \
+        match with two equal teams');
+      });
     });
 
 });
