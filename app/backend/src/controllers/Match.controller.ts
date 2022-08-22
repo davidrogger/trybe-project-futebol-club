@@ -16,6 +16,13 @@ class MatchController {
     const match = await MatchService.add(newMatch);
     res.status(201).json(match);
   }
+
+  static async update(req: Request, res: Response) {
+    const id = InputValidator.id(req.params);
+    const match = await MatchService.findMatchById(id);
+    await MatchService.update(match);
+    res.status(200).json({ message: 'Finished' });
+  }
 }
 
 export default MatchController;

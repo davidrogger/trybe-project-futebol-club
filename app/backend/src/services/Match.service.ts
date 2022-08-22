@@ -23,6 +23,17 @@ class MatchService {
     const match = await MatchModel.create(newMatch);
     return match;
   }
+
+  static async findMatchById(id: number): Promise<MatchModel> {
+    const match = await MatchModel.findByPk(id);
+    if (!match) throw new Error('Match not found');
+    return match;
+  }
+
+  static async update(match: MatchModel): Promise<void> {
+    const { id } = match;
+    await MatchModel.update({ ...match, inProgress: false }, { where: { id } });
+  }
 }
 
 export default MatchService;
