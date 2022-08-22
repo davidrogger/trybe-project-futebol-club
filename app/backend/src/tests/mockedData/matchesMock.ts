@@ -1,3 +1,4 @@
+import { match } from "assert";
 import { FindOptions, Model } from "sequelize";
 import MatchModel from "../../database/models/MatchModel";
 
@@ -16,7 +17,7 @@ export interface IMatchModelAssociated {
   }
 }
 
-export const matchListMocked = [
+export const matchListMocked: IMatchModelAssociated[] = [
   {
     "id": 1,
     "homeTeam": 16,
@@ -103,4 +104,12 @@ if ([homeTeam, awayTeam, homeTeamGoals, awayTeamGoals]
 
   matchListMocked.push(newMatch);
   return newMatch as MatchModel;
+}
+
+export async function mockUpdate(update: any, data:any) {
+  const { where } = data;
+  const { id } = where;
+  const indexToUpdated = matchListMocked.findIndex((match) => match.id === id);
+  matchListMocked.splice(indexToUpdated, 1, update);
+  return update;
 }
