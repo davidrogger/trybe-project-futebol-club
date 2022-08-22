@@ -75,10 +75,32 @@ export const matchListMocked = [
     }
 ]
 
+export const newMatchTest = {
+  "homeTeam": 16,
+  "awayTeam": 8,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2
+};
+
 export async function mockFindOne(data: any): Promise<MatchModel[]> {
   const { where } = data;
     if (Object.values(where).length > 0) {
       return matchListMocked.filter((match) => match.inProgress === where.inProgress) as unknown as MatchModel[];
     }
   return matchListMocked as unknown as MatchModel[];
+}
+
+export async function  mockCreate(newData: any): Promise<MatchModel> {
+  const lastMatchIndex = matchListMocked.length - 1;
+  const newId = matchListMocked[lastMatchIndex].id + 1; // durante os testes não existe a possaibilidade de deletar campos
+
+  const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = newData;
+
+if ([homeTeam, awayTeam, homeTeamGoals, awayTeamGoals]
+    .includes(undefined)) throw new Error('Invalid column');
+
+  const newMatch = { id: newId, ...newData, inProgress: true };
+
+  matchListMocked.push(newMatch);
+  return newMatch as MatchModel;
 }

@@ -12,7 +12,6 @@ import {
   authorizedValidUser,
   validUserData,
   unauthorizedValidUser,
-  validUserPayload,
 } from './mockedData/LoginUsersMock';
 
 import { app } from '../app';
@@ -92,22 +91,6 @@ describe('Route "/login"', () => {
         expect(response.body.message).to.be.equal('Incorrect email or password')
       })
     });
-  });
-
-  describe('get Route /login/validate', () => {
-    let response: Response;
-    beforeEach(async () => {
-      stub(JwtService, 'verifyToken').returns(validUserPayload);
-      response = await chai.request(app).get('/login/validate').set('authorization', 'test-token');
-    });
-  
-    it('Should return the user role', () => {
-      expect(response.body.role).to.be.equal('teste')
-    });
-  
-    it('Should return status 200', () => {
-      expect(response).to.have.status(200);
-    })
   });
 });
 
