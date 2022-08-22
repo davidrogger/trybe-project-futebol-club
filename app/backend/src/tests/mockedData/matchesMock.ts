@@ -106,6 +106,11 @@ if ([homeTeam, awayTeam, homeTeamGoals, awayTeamGoals]
   return newMatch as MatchModel;
 }
 
+export async function  mockFindByPk(id: any) {
+  const match = matchListMocked.find((match) => match.id === id);
+  return match as unknown as MatchModel;
+}
+
 export async function mockUpdate(update: any, data:any) {
   const { where } = data;
   const { id } = where;

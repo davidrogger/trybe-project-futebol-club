@@ -9,7 +9,7 @@ class MatchRoute {
     this.route = Router();
 
     this.route.get('/', MatchController.findMatches);
-    this.route.patch('/:id/finish', [AuthMiddleware.userToken, MatchController.update]);
+    this.route.patch('/:id/finish', [MatchController.update]);
     this.route.post('/', [AuthMiddleware.userToken, MatchController.add]);
   }
 }

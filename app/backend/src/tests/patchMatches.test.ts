@@ -11,6 +11,7 @@ import {
   mockCreate,
   matchListMocked,
   mockUpdate,
+  mockFindByPk,
 } from './mockedData/matchesMock';
 import { validUserPayload } from './mockedData/LoginUsersMock';
 import JwtService from '../services/Jwt.service';
@@ -27,6 +28,7 @@ const matchBefore = matchListMocked.find((match) => match.id === idTest);
 
 before(async () => {
   stub(MatchModel, 'update').callsFake(mockUpdate);
+  stub(MatchModel, 'findByPk').callsFake(mockFindByPk);
   response = await chai.request(app).patch(`/matches/${idTest}/finish`);
 });
 
