@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import TeamService from '../services/Team.service';
 import InputValidator from '../services/InputValidator.service';
 import MatchService from '../services/Match.service';
 
@@ -13,6 +14,10 @@ class MatchController {
 
   static async add(req: Request, res: Response) {
     const newMatch = InputValidator.newMatch(req.body);
+    await Promise.all([
+      TeamService.getById(newMatch.awayTeam),
+      TeamService.getById(newMatch.homeTeam),
+    ]);
     const match = await MatchService.add(newMatch);
     res.status(201).json(match);
   }

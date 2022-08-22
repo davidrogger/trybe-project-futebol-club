@@ -10,7 +10,7 @@ class TeamService {
 
   static async getById(id: number): Promise<ITeam> {
     const team = await TeamModel.findByPk(id);
-    if (!team) throw new NotFoundError('Team not found');
+    if (!team) throw new NotFoundError('There is no team with such id!');
     return team as ITeam;
   }
 }
