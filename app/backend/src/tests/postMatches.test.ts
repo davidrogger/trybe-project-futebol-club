@@ -84,8 +84,8 @@ describe('route /matches', () => {
 
       it('Should response message "It is not possible to create a \
       match with two equal teams"', () => {
-        expect(response.body.message).to.be.equal('It is not possible to create a \
-        match with two equal teams');
+        expect(response.body.message).to.be.equal(
+          'It is not possible to create a match with two equal teams');
       });
     });
 
