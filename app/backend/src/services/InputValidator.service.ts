@@ -4,7 +4,7 @@ import InvalidInputError from '../errors/InvalidInputError';
 import UnauthorizedError from '../errors/UnauthorizedError';
 import MissingFieldError from '../errors/MissingFieldError';
 import IUserLogin from '../interfaces/IUserLogin';
-import { InewMatch } from '../interfaces/Match.interface';
+import { InewMatch, ITeamGoals } from '../interfaces/Match.interface';
 
 class InputValidator {
   static login(userLogin: IUserLogin): IUserLogin {
@@ -33,6 +33,11 @@ class InputValidator {
     }
 
     return { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals };
+  }
+
+  static newGoals(goals: ITeamGoals): ITeamGoals {
+    const { homeTeamGoals, awayTeamGoals } = goals;
+    return { homeTeamGoals, awayTeamGoals };
   }
 }
 

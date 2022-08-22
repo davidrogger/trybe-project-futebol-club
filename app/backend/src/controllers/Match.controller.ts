@@ -22,11 +22,19 @@ class MatchController {
     res.status(201).json(match);
   }
 
-  static async update(req: Request, res: Response) {
+  static async updateProgress(req: Request, res: Response) {
     const id = InputValidator.id(req.params);
     const match = await MatchService.findMatchById(id);
-    await MatchService.update(match);
+    await MatchService.updateProgress(match);
     res.status(200).json({ message: 'Finished' });
+  }
+
+  static async updateGoals(req: Request, res: Response) {
+    const id = InputValidator.id(req.params);
+    const newGoals = InputValidator.newGoals(req.body);
+    const match = await MatchService.findMatchById(id);
+    await MatchService.updateGoals(match, newGoals);
+    res.status(200).json({ updated: { ...match, ...newGoals } });
   }
 }
 

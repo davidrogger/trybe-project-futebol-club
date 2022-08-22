@@ -1,6 +1,6 @@
 import TeamModel from '../database/models/TeamModel';
 import MatchModel from '../database/models/MatchModel';
-import { InewMatch } from '../interfaces/Match.interface';
+import { InewMatch, ITeamGoals } from '../interfaces/Match.interface';
 
 class MatchService {
   static async findMatches(inProgress: boolean | undefined): Promise<MatchModel[]> {
@@ -30,9 +30,14 @@ class MatchService {
     return match;
   }
 
-  static async update(match: MatchModel): Promise<void> {
+  static async updateProgress(match: MatchModel): Promise<void> {
     const { id } = match;
     await MatchModel.update({ ...match, inProgress: false }, { where: { id } });
+  }
+
+  static async updateGoals(match: MatchModel, newGoals: ITeamGoals): Promise<void> {
+    const { id } = match;
+    await MatchModel.update({ ...match, ...newGoals }, { where: { id } });
   }
 }
 

@@ -8,9 +8,10 @@ class MatchRoute {
   constructor() {
     this.route = Router();
 
-    this.route.get('/', MatchController.findMatches);
-    this.route.patch('/:id/finish', [MatchController.update]);
+    this.route.patch('/:id/finish', [MatchController.updateProgress]);
+    this.route.patch('/:id', [MatchController.updateGoals]);
     this.route.post('/', [AuthMiddleware.userToken, MatchController.add]);
+    this.route.get('/', MatchController.findMatches);
   }
 }
 
