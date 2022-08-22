@@ -101,3 +101,8 @@ export const notAllowMatchTeamNonExistent2 = {
   "homeTeamGoals": 2,
   "awayTeamGoals": 2
 };
+
+export const newTeamsGoals = {
+  "homeTeamGoals": 3,
+  "awayTeamGoals": 1
+}
