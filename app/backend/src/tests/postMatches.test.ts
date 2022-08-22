@@ -8,11 +8,13 @@ import { app } from '../app';
 import MatchModel from '../database/models/MatchModel';
 import {
   newMatchTest,
-  mockCreate,
-  notAllowMatchTeam,
+  notAllowMatchTeamEqual,
+  notAllowMatchTeamNonExistent1,
 } from './mockedData/matchesMock';
 import { validUserPayload } from './mockedData/LoginUsersMock';
 import JwtService from '../services/Jwt.service';
+import TeamModel from '../database/models/TeamModel';
+import { matchModelMock, teamModelMock } from './mockedData/sequelizeMock';
 
 chai.use(chaiHttp);
 
@@ -46,7 +48,7 @@ describe('route /matches', () => {
     describe('When route matches is called with all fields and a valid token', () => {
       beforeEach( async () => {
         stub(JwtService, 'verifyToken').returns(validUserPayload);
-        stub(MatchModel, 'create').callsFake(mockCreate);
+        stub(MatchModel, 'create').callsFake(matchModelMock.create);
         response = await chai
           .request(app)
           .post('/matches')
@@ -70,12 +72,12 @@ describe('route /matches', () => {
     describe('When the teams in a match are the same', () => {
       before(async () => {
         stub(JwtService, 'verifyToken').returns(validUserPayload);
-        stub(MatchModel, 'create').callsFake(mockCreate);
+        stub(MatchModel, 'create').callsFake(matchModelMock.create);
         response = await chai
           .request(app)
           .post('/matches')
           .set('authorization', 'test-token')
-          .send(notAllowMatchTeam);
+          .send(notAllowMatchTeamEqual);
       });
 
       it('Should response status 401', () => {
@@ -89,4 +91,24 @@ describe('route /matches', () => {
       });
     });
 
+    describe('When a team add to the match not exist in the database', () => {
+      before(async () => {
+        stub(JwtService, 'verifyToken').returns(validUserPayload);
+        stub(TeamModel, 'findByPk').callsFake(teamModelMock.findByPk)
+        response = await chai
+          .request(app)
+          .post('/matches')
+          .set('authorization', 'test-token')
+          .send(notAllowMatchTeamNonExistent1);
+      });
+
+      it('Should return status 404', () => {
+        expect(response).to.have.status(404);
+      });
+
+      it('Should return message "There is no team with such id!"', () => {
+        expect(response.body.message).to.be.equal('There is no team with such id!');
+      });
+
+    });
 });

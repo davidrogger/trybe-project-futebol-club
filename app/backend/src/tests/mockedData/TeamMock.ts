@@ -14,4 +14,3 @@ export const mockedTeamList = [
     "teamName": "Third Team Test"
   },
 ];
-

@@ -8,14 +8,9 @@ import { app } from '../app';
 import MatchModel from '../database/models/MatchModel';
 import {
   newMatchTest,
-  mockCreate,
   matchListMocked,
-  mockUpdate,
-  mockFindByPk,
 } from './mockedData/matchesMock';
-import { validUserPayload } from './mockedData/LoginUsersMock';
-import JwtService from '../services/Jwt.service';
-import { IMatchModelAssociated } from './mockedData/matchesMock';
+import { matchModelMock } from './mockedData/sequelizeMock';
 
 chai.use(chaiHttp);
 
@@ -27,8 +22,8 @@ const idTest = 41;
 const matchBefore = matchListMocked.find((match) => match.id === idTest);
 
 before(async () => {
-  stub(MatchModel, 'update').callsFake(mockUpdate);
-  stub(MatchModel, 'findByPk').callsFake(mockFindByPk);
+  stub(MatchModel, 'update').callsFake(matchModelMock.update);
+  stub(MatchModel, 'findByPk').callsFake(matchModelMock.findByPk);
   response = await chai.request(app).patch(`/matches/${idTest}/finish`);
 });
 

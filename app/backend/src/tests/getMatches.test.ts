@@ -9,8 +9,8 @@ import MatchModel from '../database/models/MatchModel';
 import {
   matchListMocked,
   IMatchModelAssociated,
-  mockFindOne,
 } from './mockedData/matchesMock';
+import { matchModelMock } from './mockedData/sequelizeMock';
 
 chai.use(chaiHttp);
 
@@ -24,7 +24,7 @@ describe('route /matches', () => {
 
     describe('When route /matches is called whitout a query filter', () => {
       beforeEach(async () => {
-        stub(MatchModel, 'findAll').callsFake(mockFindOne);
+        stub(MatchModel, 'findAll').callsFake(matchModelMock.findAll);
         response = await chai.request(app).get('/matches');
       })
       
@@ -38,7 +38,7 @@ describe('route /matches', () => {
   
     describe('When route /matches is called with a query filter true', () => {
       beforeEach(async () => {
-        stub(MatchModel, 'findAll').callsFake(mockFindOne);
+        stub(MatchModel, 'findAll').callsFake(matchModelMock.findAll);
         response = await chai.request(app).get('/matches?inProgress=true');
       })
   
@@ -55,7 +55,7 @@ describe('route /matches', () => {
   
     describe('When route /matches is called with a query filter false', () => {
       beforeEach(async () => {
-        stub(MatchModel, 'findAll').callsFake(mockFindOne);
+        stub(MatchModel, 'findAll').callsFake(matchModelMock.findAll);
         response = await chai.request(app).get('/matches?inProgress=false');
       })
       it('Should return response 200', () => {
