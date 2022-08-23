@@ -23,12 +23,13 @@ describe('route PATH /matches', () => {
   afterEach(() => sinon.restore());
 
   describe('route PATH /matches/:id/finish', () => {
+
     describe('When access the route with a valid match id', () => {
       const matchBefore = matchListMocked.find((match) => match.id === idTest);
-      stub(MatchModel, 'findByPk').callsFake(matchModelMock.findByPk);
-      stub(MatchModel, 'update').callsFake(matchModelMock.update);
       
       before(async () => {
+        stub(MatchModel, 'findByPk').callsFake(matchModelMock.findByPk);
+        stub(MatchModel, 'update').callsFake(matchModelMock.update);
         response = await chai.request(app).patch(`/matches/${idTest}/finish`);
       });
   
