@@ -1,6 +1,6 @@
 import MatchBoard from '../utils/MatchBoard';
 import { IMatchModelAssociated } from '../interfaces/Match.interface';
-import { ITeamBoardUpdate } from '../interfaces/Leaderboard.interface';
+import { ITeamBoard, ITeamBoardUpdate } from '../interfaces/Leaderboard.interface';
 import TeamBoard from '../utils/TeamBoard';
 
 class LeaderboardService {
@@ -39,6 +39,41 @@ class LeaderboardService {
       }, []);
 
     return teamBoard;
+  }
+
+  static orderingTeamBoard(teamBoard: ITeamBoard[]) {
+    return teamBoard.sort((firstTeam, secondTeam) => {
+      if (firstTeam.totalPoints > secondTeam.totalPoints) return -1;
+      if (firstTeam.totalPoints < secondTeam.totalPoints) return 1;
+      if (firstTeam.totalPoints === secondTeam.totalPoints) {
+        return this.tieBreakByVictories(firstTeam, secondTeam);
+      }
+      return 0;
+    });
+  }
+
+  static tieBreakByVictories(firstTeam: ITeamBoard, secondTeam: ITeamBoard): number {
+    if (firstTeam.totalVictories > secondTeam.totalVictories) return -1;
+    if (firstTeam.totalVictories < secondTeam.totalVictories) return 1;
+    return this.tieBreakByGoalsBalance(firstTeam, secondTeam);
+  }
+
+  static tieBreakByGoalsBalance(firstTeam: ITeamBoard, secondTeam: ITeamBoard): number {
+    if (firstTeam.goalsBalance > secondTeam.goalsBalance) return -1;
+    if (firstTeam.goalsBalance < secondTeam.goalsBalance) return 1;
+    return this.tieBreakByGoalsFavor(firstTeam, secondTeam);
+  }
+
+  static tieBreakByGoalsFavor(firstTeam: ITeamBoard, secondTeam: ITeamBoard): number {
+    if (firstTeam.goalsFavor > secondTeam.goalsFavor) return -1;
+    if (firstTeam.goalsFavor < secondTeam.goalsFavor) return 1;
+    return this.tieBreakByGoalsOwn(firstTeam, secondTeam);
+  }
+
+  static tieBreakByGoalsOwn(firstTeam: ITeamBoard, secondTeam: ITeamBoard): number {
+    if (firstTeam.goalsOwn > secondTeam.goalsOwn) return -1;
+    if (firstTeam.goalsOwn < secondTeam.goalsOwn) return 1;
+    return 0;
   }
 }
 

@@ -7,8 +7,9 @@ class LeaderboardController {
     const allMatchesFinished = await MatchService.findMatches(false);
     const matchBoard = LeaderboardService.getAllHomeMatches(allMatchesFinished);
     const teamBoard = LeaderboardService.teamBoard(matchBoard);
+    const orederedTeamBoard = LeaderboardService.orderingTeamBoard(teamBoard);
 
-    res.status(200).json(teamBoard);
+    res.status(200).json(orederedTeamBoard);
   }
 }
 
