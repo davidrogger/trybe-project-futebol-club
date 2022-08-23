@@ -8,7 +8,7 @@ import { app } from '../app';
 import MatchModel from '../database/models/MatchModel';
 import { matchModelMock } from './mockedData/sequelizeMock';
 import { ITeamBoard } from '../interfaces/Leaderboard.interface';
-import { leaderBoardMock } from './mockedData/leaderBoardMock';
+import { leaderBoardHomeMock } from './mockedData/leaderBoardMock';
 
 chai.use(chaiHttp);
 
@@ -42,16 +42,16 @@ describe('Route "/leaderboard"', () => {
       const allTeamsBoard: ITeamBoard[] = response.body;
 
       allTeamsBoard.forEach((team, index) => {
-        expect(team.name).to.be.equal(leaderBoardMock[index].name);
-        expect(team.totalPoints).to.be.equal(leaderBoardMock[index].totalPoints);
-        expect(team.totalGames).to.be.equal(leaderBoardMock[index].totalGames);
-        expect(team.totalVictories).to.be.equal(leaderBoardMock[index].totalVictories);
-        expect(team.totalDraws).to.be.equal(leaderBoardMock[index].totalDraws);
-        expect(team.totalLosses).to.be.equal(leaderBoardMock[index].totalLosses);
-        expect(team.goalsFavor).to.be.equal(leaderBoardMock[index].goalsFavor);
-        expect(team.goalsOwn).to.be.equal(leaderBoardMock[index].goalsOwn);
-        expect(team.goalsBalance).to.be.equal(leaderBoardMock[index].goalsBalance);
-        expect(team.efficiency).to.be.equal(leaderBoardMock[index].efficiency);
+        expect(team.name).to.be.equal(leaderBoardHomeMock[index].name);
+        expect(team.totalPoints).to.be.equal(leaderBoardHomeMock[index].totalPoints);
+        expect(team.totalGames).to.be.equal(leaderBoardHomeMock[index].totalGames);
+        expect(team.totalVictories).to.be.equal(leaderBoardHomeMock[index].totalVictories);
+        expect(team.totalDraws).to.be.equal(leaderBoardHomeMock[index].totalDraws);
+        expect(team.totalLosses).to.be.equal(leaderBoardHomeMock[index].totalLosses);
+        expect(team.goalsFavor).to.be.equal(leaderBoardHomeMock[index].goalsFavor);
+        expect(team.goalsOwn).to.be.equal(leaderBoardHomeMock[index].goalsOwn);
+        expect(team.goalsBalance).to.be.equal(leaderBoardHomeMock[index].goalsBalance);
+        expect(team.efficiency).to.be.equal(leaderBoardHomeMock[index].efficiency);
       });
     });
   });

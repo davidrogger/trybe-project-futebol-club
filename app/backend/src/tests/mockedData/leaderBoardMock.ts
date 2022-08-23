@@ -1,4 +1,4 @@
-export const leaderBoardMock = [
+export const leaderBoardHomeMock = [
   {
     totalPoints: 4,
     totalGames: 3,
