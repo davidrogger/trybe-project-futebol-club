@@ -1,20 +1,3 @@
-import MatchModel from "../../database/models/MatchModel";
-
-export interface IMatchModelAssociated {
-  id: number,
-  homeTeam: number,
-  homeTeamGoals: number,
-  awayTeam: number,
-  awayTeamGoals: number,
-  inProgress: boolean,
-  teamHome: {
-    teamName: string;
-  },
-  teamAway: {
-    teamName: string,
-  }
-}
-
 export const matchListMocked = [
   {
     "id": 1,

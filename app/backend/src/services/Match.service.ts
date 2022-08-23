@@ -1,9 +1,9 @@
 import TeamModel from '../database/models/TeamModel';
 import MatchModel from '../database/models/MatchModel';
-import { InewMatch, ITeamGoals } from '../interfaces/Match.interface';
+import { IMatchModelAssociated, InewMatch, ITeamGoals } from '../interfaces/Match.interface';
 
 class MatchService {
-  static async findMatches(inProgress: boolean | undefined): Promise<MatchModel[]> {
+  static async findMatches(inProgress: boolean | undefined) {
     const filterApplied = inProgress !== undefined ? { inProgress } : {};
     const matches = await MatchModel.findAll({
       where: filterApplied,
@@ -12,7 +12,7 @@ class MatchService {
         { model: TeamModel, as: 'teamAway', attributes: ['teamName'] },
       ],
     });
-    return matches;
+    return matches as IMatchModelAssociated[];
   }
 
   static filter(progress: string): boolean {

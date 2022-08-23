@@ -8,9 +8,9 @@ import { app } from '../app';
 import MatchModel from '../database/models/MatchModel';
 import {
   matchListMocked,
-  IMatchModelAssociated,
 } from './mockedData/matchesMock';
 import { matchModelMock } from './mockedData/sequelizeMock';
+import { IMatchModelAssociated } from '../interfaces/Match.interface';
 
 chai.use(chaiHttp);
 
