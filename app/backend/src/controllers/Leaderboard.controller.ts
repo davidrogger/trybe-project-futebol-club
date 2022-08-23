@@ -5,20 +5,20 @@ import MatchService from '../services/Match.service';
 class LeaderboardController {
   static async getAllHomeGames(_req: Request, res: Response) {
     const allMatchesFinished = await MatchService.findMatches(false);
-    const matchBoard = LeaderboardService.getAllMatchesByType(allMatchesFinished, 'home');
-    const teamBoard = LeaderboardService.teamBoard(matchBoard);
-    const orederedTeamBoard = LeaderboardService.orderingTeamBoard(teamBoard);
+    const matchesBoard = LeaderboardService.getAllMatchesByType(allMatchesFinished, 'home');
+    const teamsBoard = LeaderboardService.teamBoard(matchesBoard);
+    const orederedTeamsBoard = LeaderboardService.orderingTeamBoard(teamsBoard);
 
-    res.status(200).json(orederedTeamBoard);
+    res.status(200).json(orederedTeamsBoard);
   }
 
   static async getAllAwayGames(_req: Request, res: Response) {
     const allMatchesFinished = await MatchService.findMatches(false);
-    const matchBoard = LeaderboardService.getAllMatchesByType(allMatchesFinished, 'away');
-    const teamBoard = LeaderboardService.teamBoard(matchBoard);
-    const orederedTeamBoard = LeaderboardService.orderingTeamBoard(teamBoard);
+    const matchesBoard = LeaderboardService.getAllMatchesByType(allMatchesFinished, 'away');
+    const teamsBoard = LeaderboardService.teamBoard(matchesBoard);
+    const orederedTeamsBoard = LeaderboardService.orderingTeamBoard(teamsBoard);
 
-    res.status(200).json(orederedTeamBoard);
+    res.status(200).json(orederedTeamsBoard);
   }
 
   static async getAllGames(_req: Request, res: Response) {
