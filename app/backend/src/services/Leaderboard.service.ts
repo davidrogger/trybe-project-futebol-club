@@ -45,10 +45,7 @@ class LeaderboardService {
     return teamBoard.sort((firstTeam, secondTeam) => {
       if (firstTeam.totalPoints > secondTeam.totalPoints) return -1;
       if (firstTeam.totalPoints < secondTeam.totalPoints) return 1;
-      if (firstTeam.totalPoints === secondTeam.totalPoints) {
-        return this.tieBreakByVictories(firstTeam, secondTeam);
-      }
-      return 0;
+      return this.tieBreakByVictories(firstTeam, secondTeam);
     });
   }
 
