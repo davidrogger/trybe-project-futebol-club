@@ -8,6 +8,7 @@ class LeaderBoardRoute {
     this.route = Router();
 
     this.route.get('/home', [LeaderboardController.getAllHomeGames]);
+    this.route.get('/away', [LeaderboardController.getAllAwayGames]);
   }
 }
 
