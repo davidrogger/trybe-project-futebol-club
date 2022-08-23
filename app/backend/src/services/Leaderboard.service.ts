@@ -4,20 +4,23 @@ import { ITeamBoard, ITeamBoardUpdate } from '../interfaces/Leaderboard.interfac
 import TeamBoard from '../utils/TeamBoard';
 
 class LeaderboardService {
-  static getAllHomeMatches(matches: IMatchModelAssociated[]) {
-    const homeTimesData = matches
+  static getAllMatchesByType(matches: IMatchModelAssociated[], teamType: string) {
+    const teamName = teamType === 'home' ? 'teamHome' : 'teamAway';
+    const teamGoals = teamType === 'home' ? 'homeTeamGoals' : 'awayTeamGoals';
+    const OpositeTeamGoals = teamType === 'home' ? 'awayTeamGoals' : 'homeTeamGoals';
+    const matchTeamData = matches
       .map((match) => {
         const team = new MatchBoard(
           match.id,
-          match.teamHome.teamName,
-          match.homeTeamGoals,
-          match.awayTeamGoals,
+          match[teamName].teamName,
+          match[teamGoals],
+          match[OpositeTeamGoals],
         );
 
         return team;
       });
 
-    return homeTimesData;
+    return matchTeamData;
   }
 
   static teamBoard(matchesBoard: MatchBoard[]) {
