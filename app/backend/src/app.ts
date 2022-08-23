@@ -2,12 +2,14 @@ import * as express from 'express';
 import 'express-async-errors';
 import ErrorHandlerMiddleware from './middlewares/ErrorHandler.middleware';
 import AuthRoute from './routes/Auth.route';
+import LeaderboardRoute from './routes/Leaderboard.route';
 import MatchRoute from './routes/Match.route';
 import TeamRoute from './routes/Team.route';
 
 const auth = new AuthRoute();
 const teams = new TeamRoute();
 const matches = new MatchRoute();
+const leaderboard = new LeaderboardRoute();
 class App {
   public app: express.Express;
 
@@ -22,6 +24,7 @@ class App {
     this.app.use('/login', auth.route);
     this.app.use('/teams', teams.route);
     this.app.use('/matches', matches.route);
+    this.app.use('/leaderboard', leaderboard.route);
 
     this.app.use(ErrorHandlerMiddleware.response);
   }
