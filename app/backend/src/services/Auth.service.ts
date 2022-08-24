@@ -8,10 +8,8 @@ class AuthService {
   static async findUser({ email, password }: IUserLogin): Promise<IUserPayload> {
     const userData = await UserModel.findOne({ where: { email } });
     if (!userData) throw new UnauthorizedError('Incorrect email or password');
-    if (userData) {
-      const passwordCheck = PasswordHash.verify(password, userData.password);
-      if (!passwordCheck) throw new UnauthorizedError('Incorrect email or password');
-    }
+    const passwordCheck = PasswordHash.verify(password, userData.password);
+    if (!passwordCheck) throw new UnauthorizedError('Incorrect email or password');
     const { role } = userData;
     return { email, role };
   }
