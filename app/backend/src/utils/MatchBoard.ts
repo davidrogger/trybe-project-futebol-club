@@ -6,7 +6,6 @@ class MatchBoard implements IMatchBoard {
   private _loss = 0;
 
   constructor(
-    private _matchId: number,
     private _TeamName: string,
     private _goalsFavor: number,
     private _goalsOwn: number,
@@ -15,10 +14,6 @@ class MatchBoard implements IMatchBoard {
     this.victoryCalc();
     this.drawCalc();
     this.lossCalc();
-  }
-
-  get matchId() {
-    return this._matchId;
   }
 
   get teamName() {

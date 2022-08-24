@@ -11,7 +11,6 @@ class LeaderboardService {
     const matchTeamData = matches
       .map((match) => {
         const team = new MatchBoard(
-          match.id,
           match[teamName].teamName,
           match[teamGoals],
           match[OpositeTeamGoals],

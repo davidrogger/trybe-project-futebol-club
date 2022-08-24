@@ -16,7 +16,6 @@ export interface ITeamBoardUpdate extends ITeamBoard {
 }
 
 export interface IMatchBoard {
-  matchId: number;
   teamName: string;
   goalsFavor: number;
   victory: number;
