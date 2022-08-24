@@ -26,8 +26,8 @@ describe('route /matches', () => {
 
   afterEach(() => sinon.restore());
 
-    describe('When route matches is called without a token or a valid token', () => {
-      beforeEach( async () => {
+    describe('When route matches is called with a valid token', () => {
+      before(async () => {
         response = await chai
           .request(app)
           .post('/matches')
@@ -45,8 +45,25 @@ describe('route /matches', () => {
 
     });
 
+    describe('When route matches is called without a token', () => {
+      before(async () => {
+        response = await chai
+          .request(app)
+          .post('/matches')
+          .send(newMatchTest);
+      });
+
+      it('Should response status 401', () => {
+        expect(response).to.have.status(401);
+      });
+
+      it('Should response message "Missing Token', () => {
+        expect(response.body.message).to.be.equal('Missing Token');
+      });
+    });
+
     describe('When route matches is called with all fields and a valid token', () => {
-      beforeEach( async () => {
+      before( async () => {
         stub(JwtService, 'verifyToken').returns(validUserPayload);
         stub(MatchModel, 'create').callsFake(matchModelMock.create);
         response = await chai
