@@ -67,7 +67,7 @@ describe('Route "/login"', () => {
 
     describe('When the user is unauthorized by password', async () => {
       before( async() => {
-        stub(UserModel, 'findOne').resolves();
+        stub(UserModel, 'findOne').resolves(unauthorizedValidUser as UserModel);
         stub(bcrypt, 'compareSync').returns(false);
         response = await chai.request(app).post('/login').send(unauthorizedValidUser);
       });
