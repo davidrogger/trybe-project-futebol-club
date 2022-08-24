@@ -8,7 +8,7 @@ import { app } from '../app';
 import MatchModel from '../database/models/MatchModel';
 import { matchModelMock } from './mockedData/sequelizeMock';
 import { ITeamBoard } from '../interfaces/Leaderboard.interface';
-import { leaderBoardAwayMock, leaderBoardHomeMock } from './mockedData/leaderBoardMock';
+import { leaderBoardAwayMock, leaderBoardHomeMock, leaderBoardMock } from './mockedData/leaderBoardMock';
 
 chai.use(chaiHttp);
 
@@ -37,9 +37,9 @@ describe('Route "/leaderboard"', () => {
 
     it('Should order the list of Home teams by its "totalPoints" follow by "totalVictories", \
     "goalsBalance", "goalsFavor", "goalsOwn"', () => {
-      const allTeamsBoard: ITeamBoard[] = response.body;
+      const allTeamsHomeBoard: ITeamBoard[] = response.body;
 
-      allTeamsBoard.forEach((team, index) => {
+      allTeamsHomeBoard.forEach((team, index) => {
         expect(team.name).to.be.equal(leaderBoardHomeMock[index].name);
         expect(team.totalPoints).to.be.equal(leaderBoardHomeMock[index].totalPoints);
         expect(team.totalGames).to.be.equal(leaderBoardHomeMock[index].totalGames);
@@ -65,9 +65,9 @@ describe('Route "/leaderboard"', () => {
 
     it('Should order the list of Away teams by its "totalPoints" follow by "totalVictories", \
     "goalsBalance", "goalsFavor", "goalsOwn"', () => {
-      const allTeamsBoard: ITeamBoard[] = response.body;
+      const allTeamsAwayBoard: ITeamBoard[] = response.body;
 
-      allTeamsBoard.forEach((team, index) => {
+      allTeamsAwayBoard.forEach((team, index) => {
         expect(team.name).to.be.equal(leaderBoardAwayMock[index].name);
         expect(team.totalPoints).to.be.equal(leaderBoardAwayMock[index].totalPoints);
         expect(team.totalGames).to.be.equal(leaderBoardAwayMock[index].totalGames);
@@ -78,6 +78,34 @@ describe('Route "/leaderboard"', () => {
         expect(team.goalsOwn).to.be.equal(leaderBoardAwayMock[index].goalsOwn);
         expect(team.goalsBalance).to.be.equal(leaderBoardAwayMock[index].goalsBalance);
         expect(team.efficiency).to.be.equal(leaderBoardAwayMock[index].efficiency);
+      });
+    });
+  });
+
+  describe('Route /leaderboard', () => {
+    before(async () => {
+      response = await chai.request(app).get('/leaderboard');
+    });
+
+    it('Should return status 200', () => {
+      expect(response).to.have.status(200);
+    });
+
+    it('Should order the list of all teams by its "totalPoints" follow by "totalVictories", \
+    "goalsBalance", "goalsFavor", "goalsOwn"', () => {
+      const allTeamsBoard: ITeamBoard[] = response.body;
+
+      allTeamsBoard.forEach((team, index) => {
+        expect(team.name).to.be.equal(leaderBoardMock[index].name);
+        expect(team.totalPoints).to.be.equal(leaderBoardMock[index].totalPoints);
+        expect(team.totalGames).to.be.equal(leaderBoardMock[index].totalGames);
+        expect(team.totalVictories).to.be.equal(leaderBoardMock[index].totalVictories);
+        expect(team.totalDraws).to.be.equal(leaderBoardMock[index].totalDraws);
+        expect(team.totalLosses).to.be.equal(leaderBoardMock[index].totalLosses);
+        expect(team.goalsFavor).to.be.equal(leaderBoardMock[index].goalsFavor);
+        expect(team.goalsOwn).to.be.equal(leaderBoardMock[index].goalsOwn);
+        expect(team.goalsBalance).to.be.equal(leaderBoardMock[index].goalsBalance);
+        expect(team.efficiency).to.be.equal(leaderBoardMock[index].efficiency);
       });
     });
   });
