@@ -16,8 +16,8 @@ import {
 
 import { app } from '../app';
 import UserModel from '../database/models/UserModel';
-import bCryptService from '../services/PasswordHash.service';
-import JwtService from '../services/Jwt.service';
+import * as jwt from 'jsonwebtoken';
+import * as bcrypt from 'bcryptjs';
 
 chai.use(chaiHttp);
 
@@ -25,10 +25,10 @@ const { expect } = chai;
 const { stub } = sinon;
 
 describe('Route "/login"', () => {
+  let response: Response;
   afterEach(() => sinon.restore());
 
   describe('When missing a field in the body request', () => {
-    let response: Response;
     const userInvalidsLogin = [invalidUser1, invalidUser2, invalidUser3]
 
     it('Should return "All fields must be filled"', async () => {
@@ -47,13 +47,12 @@ describe('Route "/login"', () => {
   })
 
   describe('When all the fields are fulfilled', () => {
-    let response: Response;
 
     describe('When the user is authorized', async () => {
-      beforeEach( async() => {
+      before( async() => {
         stub(UserModel, 'findOne').resolves(validUserData as UserModel);
-        stub(bCryptService, 'verify').returns(true);
-        stub(JwtService, 'generateToken').returns('valid-token');
+        stub(bcrypt, 'compareSync').returns(true);
+        stub(jwt, 'sign').callsFake(() => 'valid-token');
         response = await chai.request(app).post('/login').send(authorizedValidUser);
       });
       
@@ -62,13 +61,14 @@ describe('Route "/login"', () => {
       })
       it('Should give a token', () => {
         expect(response.body.token).to.be.equal('valid-token')
+        expect(response.body.token).not.to.be.equal('valid-tokena')
       })
     })
 
     describe('When the user is unauthorized by password', async () => {
-      beforeEach( async() => {
+      before( async() => {
         stub(UserModel, 'findOne').resolves();
-        stub(bCryptService, 'verify').returns(false);
+        stub(bcrypt, 'compareSync').returns(false);
         response = await chai.request(app).post('/login').send(unauthorizedValidUser);
       });
       it('Should return status 401', () => {
@@ -80,7 +80,7 @@ describe('Route "/login"', () => {
     });
 
     describe('When the user is unauthorized by email', async () => {
-      beforeEach( async() => {
+      before( async() => {
         stub(UserModel, 'findOne').resolves(null);
         response = await chai.request(app).post('/login').send(unauthorizedValidUser);
       });
