@@ -1,6 +1,7 @@
 import TeamModel from '../database/models/TeamModel';
 import MatchModel from '../database/models/MatchModel';
 import { IMatchModelAssociated, InewMatch, ITeamGoals } from '../interfaces/Match.interface';
+import NotFoundError from '../errors/NotFoundError';
 
 class MatchService {
   static async findMatches(inProgress: boolean | undefined) {
@@ -26,7 +27,7 @@ class MatchService {
 
   static async findMatchById(id: number): Promise<MatchModel> {
     const match = await MatchModel.findByPk(id);
-    if (!match) throw new Error('Match not found');
+    if (!match) throw new NotFoundError('Match not found');
     return match;
   }
 

@@ -59,7 +59,7 @@ describe('route PATH /matches/:id', () => {
     response = await chai.request(app).patch(`/matches/${idTest}`).send(newTeamsGoals);
   });
   
-  describe('Given a right body format and a valid match "id"', () => {
+  describe('When given a valid match "id"', () => {
 
     it('Should response status 200', () => {
       expect(response).to.have.status(200);
@@ -69,6 +69,21 @@ describe('route PATH /matches/:id', () => {
       const newMatchTeamsGoals = matchListMocked.find((match) => match.id === idTest);
       expect(newMatchTeamsGoals?.homeTeamGoals).to.be.equal(newTeamsGoals.homeTeamGoals);
       expect(newMatchTeamsGoals?.awayTeamGoals).to.be.equal(newTeamsGoals.awayTeamGoals);
+    });
+  });
+
+  describe('When given a match "id" not found', () => {
+    before(async () => {
+      stub(MatchModel, 'findByPk').callsFake(matchModelMock.findByPk);
+      response = await chai.request(app).patch('/matches/999');
+    });
+
+    it('Should response status 404', () => {
+      expect(response).to.have.status(404);
+    });
+
+    it('Should response message "Match not found"', () => {
+      expect(response.body.message).to.be.equal('Match not found');
     });
   });
 });
