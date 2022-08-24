@@ -36,3 +36,42 @@ export const leaderBoardHomeMock = [
     efficiency: '33.33'
   }
 ]
+
+export const leaderBoardAwayMock = [
+  {
+    totalPoints: 4,
+    totalGames: 2,
+    name: 'Santos',
+    totalVictories: 1,
+    totalDraws: 1,
+    totalLosses: 0,
+    goalsFavor: 4,
+    goalsOwn: 2,
+    goalsBalance: 2,
+    efficiency: '66.67'
+  },
+  {
+    totalPoints: 1,
+    totalGames: 2,
+    name: 'Grêmio',
+    totalVictories: 0,
+    totalDraws: 1,
+    totalLosses: 1,
+    goalsFavor: 2,
+    goalsOwn: 3,
+    goalsBalance: -1,
+    efficiency: '16.67'
+  },
+  {
+    totalPoints: 0,
+    totalGames: 1,
+    name: 'Avaí/Kindermann',
+    totalVictories: 0,
+    totalDraws: 0,
+    totalLosses: 1,
+    goalsFavor: 0,
+    goalsOwn: 2,
+    goalsBalance: -2,
+    efficiency: '0.00'
+  }
+]
