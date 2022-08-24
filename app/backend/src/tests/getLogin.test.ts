@@ -10,7 +10,7 @@ import {
 } from './mockedData/LoginUsersMock';
 
 import { app } from '../app';
-import JwtService from '../services/Jwt.service';
+import * as jwt from 'jsonwebtoken';
 
 chai.use(chaiHttp);
 
@@ -18,14 +18,16 @@ const { expect } = chai;
 const { stub } = sinon;
 
 describe('Route "/login"', () => {
-  afterEach(() => sinon.restore());
+  let response: Response;
+
+  before(async () => {
+    stub(jwt, 'verify').callsFake(() => validUserPayload);
+    response = await chai.request(app).get('/login/validate').set('authorization', 'test-token');
+  });
+
+  after(() => sinon.restore());
 
   describe('get Route /login/validate', () => {
-    let response: Response;
-    beforeEach(async () => {
-      stub(JwtService, 'verifyToken').returns(validUserPayload);
-      response = await chai.request(app).get('/login/validate').set('authorization', 'test-token');
-    });
   
     it('Should return the user role', () => {
       expect(response.body.role).to.be.equal('teste')
