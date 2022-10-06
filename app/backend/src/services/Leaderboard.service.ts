@@ -1,7 +1,7 @@
-import MatchBoard from '../utils/MatchBoard';
+import MatchBoard from '../entities/MatchBoard';
 import { IMatchModelAssociated } from '../interfaces/Match.interface';
 import { ITeamBoard, ITeamBoardUpdate } from '../interfaces/Leaderboard.interface';
-import TeamBoard from '../utils/TeamBoard';
+import TeamBoard from '../entities/TeamBoard';
 
 class LeaderboardService {
   static getAllMatchesByType(matches: IMatchModelAssociated[], teamType: string) {
