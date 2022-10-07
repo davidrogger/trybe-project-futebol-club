@@ -54,7 +54,7 @@ Importante: seguir a ordem apresentada a baixo, para o funcionamento.
  - Node versão 16
  - Docker
  - Docker-compose versão >=1.29.2
- - API Client ([Thunder Client](https://www.thunderclient.com/), [Insomnia](https://insomnia.rest/), [POSTMAN](https://www.postman.com/), ou algum outro de sua preferência)
+ - node versão 16.15.0 LTS ou superior
 
 </details>
 
