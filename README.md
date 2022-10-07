@@ -2,17 +2,18 @@
 
 # Sobre o Projeto 
 
-- Neste projeto foi desenvolvido uma API para ser consumida por um frontend ja fornecido, onde é apresentado uma tabela relacionadas a partidas de futebol.
-- Usando a ORM sequelize para fazer coletar, criar e remover informações do banco.
+- Neste projeto foi desenvolvido uma API para ser consumida por um **frontend desenvolvido pela trybe**, onde é criado um ambiente classificando times em partidas de futebol.
+- Usando a ORM sequelize para coletar, criar e remover informações do banco.
+- Imagens abaixo, são de desenvolvimento da trybe relativas ao front.
 
-<a href="./img/xxxxxxxxxx.png">
-  <img src="./img/xxxxxxxxxx.png" width="30%"></img>
+<a href="./screenshots/tfc_login.png">
+  <img src="./screenshots/tfc_login.png" width="30%"></img>
 </a>
-<a href="./img/xxxxxxxxxx.png">
-  <img src="./img/xxxxxxxxxx.png" width="30%"></img>
+<a href="./screenshots/tfc_matches.png">
+  <img src="./screenshots/tfc_matches.png" width="30%"></img>
 </a>
-<a href="./img/xxxxxxxxxx.png">
-  <img src="./img/xxxxxxxxxx.png" width="30%"></img>
+<a href="./screenshots/tfc_leadership.png">
+  <img src="./screenshots/tfc_leadership.png" width="30%"></img>
 </a>
 
 # Tecnologias e ferramentas usadas 🛠
@@ -26,7 +27,6 @@
 ![MySQL](https://img.shields.io/badge/-MySQL-EAA221?style=flat-square&logo=mysql&logoColor=1e4c68)
 ![Sequelize](https://img.shields.io/badge/-Sequelize-02afef?style=flat-square&logo=sequelize&logoColor=ffffff)
 ![JWToken](https://img.shields.io/badge/-JWToken-000?style=flat-square&logo=jsonwebtokens&logoColor=d63aff)
-![Swagger](https://img.shields.io/badge/-Swagger-85EA2D?style=flat-square&logo=swagger&logoColor=000)
 
 # Desafios
 
@@ -93,48 +93,6 @@ JWT_SECRET=suaSenhaSecreta
 Para iniciar o docker compose, você deve estar dentro da pasta raiz do projeto usar o comando: `docker-compose up -d`
 
 Verifique se os container está funcionando e rodando com o comando `docker ps`. Devem aparecer dois container com o nome de *blogs_api* e *blogs_api_db*.
-
-</details>
-
-<details>
-  <summary>
-    <strong>
-      🗂 Acessando as Rotas
-    </strong>
-  </summary>
-
-As rodas desenvolvidas no projeto são;
-
-# /products
-### GET - `localhost:3000/products/search`
-- Rota responsável por realizar uma consultas por qualquer palavra inclusa em um nome de produto, usando o sinal de `?q=NomeDesejado` após search.
-
-<details>
-  <summary>
-    Exemplo:
-  </summary>
-
-  ⚠️ Pode ser usado o URL em seu navegador, um API Client ou acessando a rota `localhost:3000/docs` em seu navegador.
-
-  <a href="./img/swagger_searchProductName.png">
-    <img src="./img/swagger_searchProductName.png" width="60%"></img>
-  </a>
-
-</details>
-
-#
-### GET - `localhost:3000/xxx/x`
-- Rota responsável por realizar uma consulta por um produto especifico com base em seu *id*.
-<details>
-  <summary>
-    Exemplo:
-  </summary>
-
-  ⚠️ Pode ser usado o URL em seu navegador, um API Client ou acessando a rota `localhost:3000/docs` em seu navegador.
-
-  <a href="./img/swagger_getProductId.png">
-    <img src="./img/swagger_getProductId.png" width="60%"></img>
-  </a>
 
 </details>
 
