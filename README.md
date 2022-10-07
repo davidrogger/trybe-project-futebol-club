@@ -87,4 +87,24 @@ Para iniciar o docker compose, foi configurado pela trybe um script bem simples,
 
 </details>
 
+<details>
+  <summary>
+    <strong>
+      :family_man_woman_girl_boy: Usuários
+    </strong>
+  </summary>
+
+Usuário administrador:
+```
+email: admin@admin.com
+password: secret_admin
+```
+Usuário cliente:
+```
+email: user@user.com
+password: secret_user
+```
+
+</details>
+
 </details>
