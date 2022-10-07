@@ -36,8 +36,8 @@
 
 # Conclusão
 
-- Foi muito gratificante, desenvolver e práticar nesse projeto o uso de classes, conseguir usar as classes para resolver o desafio para criar uma tabela de leadership, desenvolver e enteder melhor os testes de integração usando o typescript.
-- Usei classes para seguir o padrão inicial do projeto para definir os services, mas quero melhorar o uso dos principios do SOLID, usei classes mais para familiarização, mas poderia ter aplicado vários principios no desenvolvimento, pretendo aplicar os principios de liskov, abrindo possibilidades de mudança de ORM e uma flexibilização maior no projeto.
+- Foi muito gratificante, desenvolver e práticar nesse projeto o uso de classes, conseguir usar as classes para resolver o desafio para criar uma tabela de leadership, desenvolver e entender melhor os testes de integração usando o typescript.
+- Usei classes para seguir o padrão inicial do projeto para definir os controllers, routes, services  mas quero melhorar o uso dos principios do SOLID, usei classes mais para familiarização, mas poderia ter aplicado vários principios no desenvolvimento, pretendo aplicar os principios de liskov, abrindo possibilidades de mudança de ORM e uma flexibilização maior no projeto.
 
 # Iniciando o Projeto Trybe Futebol Club.
 
