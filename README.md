@@ -65,21 +65,14 @@ Importante: seguir a ordem apresentada a baixo, para o funcionamento.
     </strong>
   </summary>
 
-Deve-se criar um arquivo .env na raiz do projeto com o seguinte conteúdo:
+Deve-se criar um arquivo .env na raiz da pasta backend com o seguinte conteúdo:
 ```
-#### SERVER VARS
-NODE_ENV=development
-API_PORT=3000
-
-#### DATABASE VARS
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_DB_NAME=blogs-api
-MYSQL_USER=root
-MYSQL_PASSWORD=password
-
-#### SECRECT VARS
-JWT_SECRET=suaSenhaSecreta
+JWT_SECRET=jwt_secret
+APP_PORT=3001
+DB_USER=root
+DB_PASS=123456
+DB_HOST=localhost 
+DB_PORT=3002
 ```
 </details>
 
