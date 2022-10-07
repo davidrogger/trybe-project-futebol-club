@@ -83,9 +83,7 @@ DB_PORT=3002
     </strong>
   </summary>
 
-Para iniciar o docker compose, você deve estar dentro da pasta raiz do projeto usar o comando: `docker-compose up -d`
-
-Verifique se os container está funcionando e rodando com o comando `docker ps`. Devem aparecer dois container com o nome de *blogs_api* e *blogs_api_db*.
+Para iniciar o docker compose, foi configurado pela trybe um script bem simples, basta digitar em seu terminal localizado na primeira pasta do projeto, `npm run compose:up`, ele irá iniciar os containers necessários para ter acesso ao frontend, que consome a API. Após concluir essa inicialização, basta acessar em seu navegador a url: `localhost:3000`.
 
 </details>
 
