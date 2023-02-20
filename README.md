@@ -1,5 +1,3 @@
-# 🚧 README em construção 🚧
-
 # Sobre o Projeto 
 
 - Neste projeto foi desenvolvido uma API para ser consumida por um **frontend desenvolvido pela trybe**, onde é criado um ambiente classificando times em partidas de futebol.
