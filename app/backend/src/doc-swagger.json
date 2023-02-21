@@ -105,6 +105,28 @@
           }
         }
       }
+    },
+    "/matches" : {
+      "get": {
+        "tags": ["Matches"],
+        "summary": "Endpoint para buscar partidas.",
+        "description": "Rota responsável por buscar todas partidas.",
+        "parameters": [
+          {
+            "name": "inProgress",
+            "in": "query",
+            "description": "Para realizar um filtro e apresentar somente partidas em andamento, basta adicionar um parametro, `inProgress` com valor true. Caso omitido, todas partidas sem filtro serão apresentadas."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
     }
   },
   "components": {

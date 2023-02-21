@@ -222,7 +222,6 @@
       <span>Endpoint <code>/teams</code></span>
   </summary>
 
-
   # GET - localhost:3001/teams
 
   > - Rota responsável mostrar Todos times cadastrados
@@ -249,7 +248,23 @@
 
   <details>
   <summary>
-      <span>Endpoint <code>/match</code></span>
+      <span>Endpoint <code>/matches</code></span>
+  </summary>
+
+  # GET - localhost:3001/matches
+
+  > - Rota responsável mostrar todas partidas cadastradas com filtragem de partidas em progresso.
+  > - Para mostrar as partidas, é necessário realizar uma requisição GET para URL: `localhost:3000/matches`.
+  > Caso deseje adicionar o filtro apresentando somente as partidas em progresso, basta adicionar um parametro inProgress true na rota: `localhost:3001/matches?inProgress=true`.
+  > ### Status:
+  > - **`200`**: Retorna um json com todas partidas cadastrados ou dentro do filtro desejado.
+  > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
+
+  </details>
+
+  <details>
+  <summary>
+      <span>Endpoint <code>/leaderboard</code></span>
   </summary>
 
 
