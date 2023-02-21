@@ -208,6 +208,38 @@
           }
         }
       }
+    },
+    "/matches/{id}/finish": {
+      "patch": {
+        "tags": ["Matches"],
+        "summary": "Endpoint para finalizar partida.",
+        "description": "Rota responsável por encerrar progresso de partida.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID da partida que deseja encerrar.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Encerramento da partida realizada com sucesso."
+          },
+          "400": {
+            "description": "ID da partida inválido."
+          },
+          "404": {
+            "description": "ID da partida não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
     }
   },
   "components": {

@@ -304,6 +304,16 @@
   > - **`404`**: Retorna um json com a mensagem `Match not found`.
   > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
 
+  # PATCH - localhost:3001/matches/:id/finish
+
+  > - Rota responsável por encerrar progresso de partida.
+  > - Para atualizar uma partida, é necessário realizar uma requisição PATCH para URL: `localhost:3001/matches/:id/finish` com o ID da partida no parametro.
+  > ### Status:
+  > - **`200`**: Retorna um json com uma mensagem de sucesso.
+  > - **`400`**: Retorna um json com a mensagem `Id must be a number`.
+  > - **`404`**: Retorna um json com a mensagem `Match not found`.
+  > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
+
   </details>
 
   <details>
