@@ -215,6 +215,15 @@
   > - **`401`**: Retorna um json com a mensagem de acesso não autorizado, no caso de ausencia do token ou falta de validade.
   > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
 
+  # GET - localhost:3001/teams
+
+  > - Rota responsável mostrar Todos times cadastrados
+  > - Para mostrar os times, é necessário realizar uma requisição GET para URL: `localhost:3000/teams`.
+  > ### Status:
+  > - **`200`**: Retorna um json com todos times cadastrados.
+  > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
+
+
   </details>
 
   </details>

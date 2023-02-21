@@ -59,6 +59,21 @@
           }
         }
       }
+    },
+    "/teams": {
+      "get": {
+        "tags": ["Teams"],
+        "summary": "Endpoint para coleta de todos times",
+        "description": "Rota responsável por mostrar todos os times cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
     }
   },
   "components": {
