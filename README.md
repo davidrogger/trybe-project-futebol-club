@@ -215,6 +215,14 @@
   > - **`401`**: Retorna um json com a mensagem de acesso não autorizado, no caso de ausencia do token ou falta de validade.
   > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
 
+  </details>
+
+  <details>
+  <summary>
+      <span>Endpoint <code>/teams</code></span>
+  </summary>
+
+
   # GET - localhost:3001/teams
 
   > - Rota responsável mostrar Todos times cadastrados
@@ -222,6 +230,27 @@
   > ### Status:
   > - **`200`**: Retorna um json com todos times cadastrados.
   > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
+
+  ## GET - `localhost:3000/teams/:id`
+
+  > - Rota responsável buscar detalhes de uma time por seu id.
+  > - Para buscar o time pelo id, é necessário realizar uma requisição GET com um parametros `id`.
+  > ### Exemplo:
+  >```
+  >localhost:3000/teams/1
+  >```
+  > ### Status:
+  > - **`200`**: Retorna um json com os detalhes do time.
+  > - **`400`**: Retorna um json com a mensagem `Id must be a number`.
+  > - **`404`**: Retorna um json com a mensagem `There is no team with such id!`.
+  > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
+
+  </details>
+
+  <details>
+  <summary>
+      <span>Endpoint <code>/match</code></span>
+  </summary>
 
 
   </details>

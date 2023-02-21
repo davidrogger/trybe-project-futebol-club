@@ -74,6 +74,37 @@
           }
         }
       }
+    },
+    "/teams/{id}": {
+      "get": {
+        "tags": ["Teams"],
+        "summary": "Endpoint para buscar time por ID.",
+        "description": "Rota responsável por buscar time por ID e mostrar detalhes de cadastro.",
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "400": {
+            "description": "Preenchimento do parametro de busca incorreto, deve ser um número."
+          },
+          "404": {
+            "description": "ID não en,contrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
     }
   },
   "components": {
