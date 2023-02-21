@@ -5,7 +5,59 @@
     "description": "Projeto prático criando uma API Restfull usando orientação a objetos com typescript."
   },
   "paths": {
-
+    "/login": {
+      "post": {
+        "tags": ["Login"],
+        "required": true,
+        "summary": "Endpoint para autenticação de entrada.",
+        "description": "Rota responsável por identificar e gerar um token de acesso ao usuário.",
+        "requestBody": {
+          "description": "Deve ser enviado um corpo válido com um `email` e `senha` válidos.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Autenticação realizada com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Campo obrigatório pendente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Acesso não autorizado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    }
   },
   "components": {
     "securitySchemes": {
@@ -13,6 +65,52 @@
         "type": "apiKey",
         "name": "Authorization",
         "in": "header"
+      }
+    },
+    "schemas": {
+      "LoginBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Deve ser um e-mail cadastrado.",
+            "example": "user@user.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Deve ser o password correspondente ao e-mail cadastrado.",
+            "example": "secret_user"
+          }
+        }
+      },
+      "TokenResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Um token gerado com base em seus dados de autenticação usando JWT."
+          }
+        }
+      },
+      "UnauthorizedResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Resposta quando não é encontrado o usuário ou a senha está incorreta.",
+            "default": "Incorrect email or password"
+          }
+        }
+      },
+      "BadRequestResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Resposta quando ausente algum campo obrigatório.",
+            "default": "All fields must be filled"
+          }
+        }
       }
     }
   }

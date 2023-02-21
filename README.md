@@ -186,6 +186,25 @@
       <span>Endpoint <code>/login</code></span>
   </summary>
 
+  # POST - localhost:3001/login
+
+  > - Rota responsável autenticar usuário e gerar um token de acesso.
+  > - Para autenticar o usuário, é necessário realizar uma requisição POST para URL: `localhost:3000/login` contendo um corpo json com:
+  > - `email` Um email cadastrado.
+  > - `password` Senha correspondente ao usuário cadastrado.
+  > ### Exemplo:
+  >```
+  >{
+  >  "email": "user@user.com",
+  >  "password": "secret_user"
+  >}
+  >```
+  > ### Status:
+  > - **`200`**: Retorna um json com o token para acessar rotas que precisam de autenticação.
+  > - **`400`**: Retorna um json com a mensagem indicando qual campo está pendente na requisição.
+  > - **`401`**: Retorna um json com a mensagem indicando que o usuário ou senha são inválidos.
+  > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
+
   </details>
 
   </details>
