@@ -337,6 +337,14 @@
   > - **`200`**: Retorna um json com detalhes somente dos times da casa.
   > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
 
+  # GET - localhost:3001/leaderboard/away
+
+  > - Rota responsável mostrar detalhes das partidas dos times de visitantes.
+  > - Para mostrar os detalhes, é necessário realizar uma requisição GET para URL: `localhost:3001/leaderboard/away`.
+  > ### Status:
+  > - **`200`**: Retorna um json com detalhes somente dos times visitantes.
+  > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
+
   </details>
 
   </details>
