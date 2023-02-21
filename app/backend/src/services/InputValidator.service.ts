@@ -40,6 +40,9 @@ class InputValidator {
 
   static newGoals(goals: ITeamGoals): ITeamGoals {
     const { homeTeamGoals, awayTeamGoals } = goals;
+    if ([homeTeamGoals, awayTeamGoals].some((field) => field === undefined)) {
+      throw new InvalidInputError('All fields must be filled');
+    }
     return { homeTeamGoals, awayTeamGoals };
   }
 }
