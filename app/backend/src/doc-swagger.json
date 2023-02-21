@@ -240,6 +240,21 @@
           }
         }
       }
+    },
+    "/leaderboard": {
+      "get": {
+        "tags": ["Leaderboard"],
+        "summary": "Endpoint mostra detalhes de todos times",
+        "description": "Rota responsável por mostrar detalhes de todos times durante as partidas.",
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
     }
   },
   "components": {

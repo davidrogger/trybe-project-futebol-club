@@ -321,6 +321,13 @@
       <span>Endpoint <code>/leaderboard</code></span>
   </summary>
 
+  # GET - localhost:3001/leaderboard
+
+  > - Rota responsável mostrar detalhes das partidas de todos times.
+  > - Para mostrar os detalhes, é necessário realizar uma requisição GET para URL: `localhost:3001/leaderboard`.
+  > ### Status:
+  > - **`200`**: Retorna um json com todas partidas cadastrados ou dentro do filtro desejado.
+  > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
 
   </details>
 
