@@ -28,7 +28,7 @@ class MatchService {
   static async findMatchById(id: number): Promise<MatchModel> {
     const match = await MatchModel.findByPk(id);
     if (!match) throw new NotFoundError('Match not found');
-    return match;
+    return match.get({ plain: true });
   }
 
   static async updateProgress(match: MatchModel): Promise<void> {

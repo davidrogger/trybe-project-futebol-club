@@ -1,5 +1,9 @@
 import * as express from 'express';
 import 'express-async-errors';
+
+import * as swaggerUi from 'swagger-ui-express';
+import * as swaggerFile from './doc-swagger.json';
+
 import ErrorHandlerMiddleware from './middlewares/ErrorHandler.middleware';
 import AuthRoute from './routes/Auth.route';
 import LeaderboardRoute from './routes/Leaderboard.route';
@@ -25,6 +29,7 @@ class App {
     this.app.use('/teams', teams.route);
     this.app.use('/matches', matches.route);
     this.app.use('/leaderboard', leaderboard.route);
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
     this.app.use(ErrorHandlerMiddleware.response);
   }

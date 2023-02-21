@@ -1,0 +1,356 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Project Trybe Futebol Club",
+    "description": "Projeto prático criando uma API Restfull usando orientação a objetos com typescript."
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["Login"],
+        "required": true,
+        "summary": "Endpoint para autenticação de entrada.",
+        "description": "Rota responsável por identificar e gerar um token de acesso ao usuário.",
+        "requestBody": {
+          "description": "Deve ser enviado um corpo válido com um `email` e `senha` válidos.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Autenticação realizada com sucesso."
+          },
+          "400": {
+            "description": "Campo obrigatório pendente"
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/login/validate": {
+      "get": {
+        "tags": ["Login"],
+        "summary": "Endpoint para validar token.",
+        "description": "Rota responsável por verificar validade do token fornecida no header de autenticação.",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token válido."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/teams": {
+      "get": {
+        "tags": ["Teams"],
+        "summary": "Endpoint para coleta de todos times",
+        "description": "Rota responsável por mostrar todos os times cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/teams/{id}": {
+      "get": {
+        "tags": ["Teams"],
+        "summary": "Endpoint para buscar time por ID.",
+        "description": "Rota responsável por buscar time por ID e mostrar detalhes de cadastro.",
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "400": {
+            "description": "Preenchimento do parametro de busca incorreto, deve ser um número."
+          },
+          "404": {
+            "description": "ID não en,contrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/matches" : {
+      "get": {
+        "tags": ["Matches"],
+        "summary": "Endpoint para buscar partidas.",
+        "description": "Rota responsável por buscar todas partidas.",
+        "parameters": [
+          {
+            "name": "inProgress",
+            "in": "query",
+            "description": "Para realizar um filtro e apresentar somente partidas em andamento, basta adicionar um parametro, `inProgress` com valor true. Caso omitido, todas partidas sem filtro serão apresentadas."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      },
+      "post": {
+        "tags": ["Matches"],
+        "summary": "Endpoint para cadastro de partidas.",
+        "description": "Rota responsável por cadastrar novas partidas de jogo.",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Necessário o envio dos campos obrigatório para realizar o cadastro com sucesso.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref":"#/components/schemas/NewMatchBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cadastro realizado com sucesso."
+          },
+          "400": {
+            "description": "Campo obrigatório pendente."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "404": {
+            "description": "ID do time cadastrado não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/matches/{id}": {
+      "patch": {
+        "tags": ["Matches"],
+        "summary": "Endpoint para atualização gols da partida.",
+        "description": "Rota responsável por atualizar quantidade de gols na partida.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID referente a partida que deseja atualizar.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Deve ser enviado um corpo válido com `homeTeamGoals` e `awayTeamGoals` válidos.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGoals"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Atualização realizada com sucesso."
+          },
+          "400": {
+            "description": "Requisição fora do formato obrigatório."
+          },
+          "404": {
+            "description": "ID da partida não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/matches/{id}/finish": {
+      "patch": {
+        "tags": ["Matches"],
+        "summary": "Endpoint para finalizar partida.",
+        "description": "Rota responsável por encerrar progresso de partida.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID da partida que deseja encerrar.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Encerramento da partida realizada com sucesso."
+          },
+          "400": {
+            "description": "ID da partida inválido."
+          },
+          "404": {
+            "description": "ID da partida não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/leaderboard": {
+      "get": {
+        "tags": ["Leaderboard"],
+        "summary": "Endpoint mostra detalhes de todos times",
+        "description": "Rota responsável por mostrar detalhes de todos times durante as partidas.",
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/leaderboard/home": {
+      "get": {
+        "tags": ["Leaderboard"],
+        "summary": "Endpoint mostra detalhes dos times da casa.",
+        "description": "Rota responsável por mostrar detalhes dos times da casa durante as partidas.",
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    },
+    "/leaderboard/away": {
+      "get": {
+        "tags": ["Leaderboard"],
+        "summary": "Endpoint mostra detalhes dos times visitantes.",
+        "description": "Rota responsável por mostrar detalhes dos times visitantes durante as partidas.",
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "token": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "LoginBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Deve ser um e-mail cadastrado.",
+            "example": "user@user.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Deve ser o password correspondente ao e-mail cadastrado.",
+            "example": "secret_user"
+          }
+        }
+      },
+      "NewMatchBody": {
+        "type": "object",
+        "properties": {
+          "homeTeam": {
+            "type": "number",
+            "description": "ID de um time cadastrado.",
+            "example": "1"
+          },
+          "awayTeam": {
+            "type": "number",
+            "description": "ID de um time cadastrado.",
+            "example": "2"
+          },
+          "homeTeamGoals": {
+            "type": "number",
+            "description": "Quantidade de gols realizados pelo time da casa.",
+            "example": "0"
+          },
+          "awayTeamGoals": {
+            "type": "number",
+            "description": "Quantidade de gols realizados pelo time visitante.",
+            "example": "1"
+          }
+        }
+      },
+      "UpdateGoals": {
+        "type": "object",
+        "properties": {
+          "homeTeamGoals": {
+            "type": "number",
+            "description": "Deve ser um número positivo.",
+            "example": 2
+          },
+          "awayTeamGoals": {
+            "type": "number",
+            "description": "Deve ser um número positivo.",
+            "example": 1
+          }
+        }
+      }
+    }
+  }
+}

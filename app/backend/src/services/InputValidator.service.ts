@@ -28,6 +28,9 @@ class InputValidator {
 
   static newMatch(match: InewMatch): InewMatch {
     const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = match;
+    if ([homeTeam, awayTeam, homeTeamGoals, awayTeamGoals].some((field) => field === undefined)) {
+      throw new InvalidInputError('All fields must be filled');
+    }
     if (homeTeam === awayTeam) {
       throw new UnauthorizedError('It is not possible to create a match with two equal teams');
     }
@@ -37,6 +40,9 @@ class InputValidator {
 
   static newGoals(goals: ITeamGoals): ITeamGoals {
     const { homeTeamGoals, awayTeamGoals } = goals;
+    if ([homeTeamGoals, awayTeamGoals].some((field) => field === undefined)) {
+      throw new InvalidInputError('All fields must be filled');
+    }
     return { homeTeamGoals, awayTeamGoals };
   }
 }
