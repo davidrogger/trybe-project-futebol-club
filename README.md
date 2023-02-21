@@ -7,13 +7,13 @@
 #
 <div align="center">
   <a href="https://raw.githubusercontent.com/davidrogger/trybe-project-blogs-api/readme-update/readme-imgs/project_top.webp">
-    <img height="350px" width="30%" src="./readme-imgs/project_top.webp">
+    <img width="30%" src="./readme-imgs/project_top.webp">
   </a>
   <a href="https://raw.githubusercontent.com/davidrogger/trybe-project-blogs-api/readme-update/readme-imgs/project_mid.webp">
-    <img height="350px" width="30%" src="./readme-imgs/project_mid.webp">
+    <img width="30%" src="./readme-imgs/project_mid.webp">
   </a>
   <a href="https://raw.githubusercontent.com/davidrogger/trybe-project-blogs-api/readme-update/readme-imgs/project_bot.webp">
-    <img height="350px" width="30%" src="./readme-imgs/project_bot.webp">
+    <img width="30%" src="./readme-imgs/project_bot.webp">
   </a>
 </div>
 
