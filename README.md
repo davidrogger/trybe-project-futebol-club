@@ -285,10 +285,10 @@
   > - **`404`**: Retorna um json com a mensagem `There is no team with such id!`.
   > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
 
-  # POST - localhost:3001/matches/:id
+  # PATCH - localhost:3001/matches/:id
 
   > - Rota responsável atualizar gols realizados nas partidas.
-  > - Para atualizar uma partida, é necessário realizar uma requisição POST para URL: `localhost:3001/matches/:id` com o ID da partida no parametro e um corpo json com:
+  > - Para atualizar uma partida, é necessário realizar uma requisição PATCH para URL: `localhost:3001/matches/:id` com o ID da partida no parametro e um corpo json com:
   > - `homeTeamGoals` Valor númerico de quantidade de gols do time da casa.
   > - `awayTeamGoals` Valor númerico de quantidade de gols do time visitante.
     > ### Exemplo:
