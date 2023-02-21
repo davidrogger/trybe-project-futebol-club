@@ -126,6 +126,44 @@
             "description": "Falha interna com o servidor."
           }
         }
+      },
+      "post": {
+        "tags": ["Matches"],
+        "summary": "Endpoint para cadastro de partidas.",
+        "description": "Rota responsável por cadastrar novas partidas de jogo.",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Necessário o envio dos campos obrigatório para realizar o cadastro com sucesso.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref":"#/components/schemas/NewMatchBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cadastro realizado com sucesso."
+          },
+          "400": {
+            "description": "Campo obrigatório pendente."
+          },
+          "401": {
+            "description": "Acesso não autorizado."
+          },
+          "404": {
+            "description": "ID do time cadastrado não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
       }
     }
   },
@@ -150,6 +188,31 @@
             "type": "string",
             "description": "Deve ser o password correspondente ao e-mail cadastrado.",
             "example": "secret_user"
+          }
+        }
+      },
+      "NewMatchBody": {
+        "type": "object",
+        "properties": {
+          "homeTeam": {
+            "type": "number",
+            "description": "ID de um time cadastrado.",
+            "example": "1"
+          },
+          "awayTeam": {
+            "type": "number",
+            "description": "ID de um time cadastrado.",
+            "example": "2"
+          },
+          "homeTeamGoals": {
+            "type": "number",
+            "description": "Quantidade de gols realizados pelo time da casa.",
+            "example": "0"
+          },
+          "awayTeamGoals": {
+            "type": "number",
+            "description": "Quantidade de gols realizados pelo time visitante.",
+            "example": "1"
           }
         }
       }

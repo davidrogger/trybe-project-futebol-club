@@ -179,7 +179,7 @@
 
   >Para acessar e testar as rotas:
   >1. Usando algum API Cliente, conforme citado nas configurações mínimas.
-  >2. Acessando a documentação gerada pelo swagger `localhost:3000/api-docs`.
+  >2. Acessando a documentação gerada pelo swagger `localhost:3001/api-docs`.
 
   <details>
   <summary>
@@ -189,7 +189,7 @@
   # POST - localhost:3001/login
 
   > - Rota responsável autenticar usuário e gerar um token de acesso.
-  > - Para autenticar o usuário, é necessário realizar uma requisição POST para URL: `localhost:3000/login` contendo um corpo json com:
+  > - Para autenticar o usuário, é necessário realizar uma requisição POST para URL: `localhost:3001/login` contendo um corpo json com:
   > - `email` Um email cadastrado.
   > - `password` Senha correspondente ao usuário cadastrado.
   > ### Exemplo:
@@ -209,7 +209,7 @@
 
   > - Rota responsável verificar o token de acesso.
   > - É necessário adicionar ao headers o token para executar esta requisição.
-  > - Para verificar o token, é necessário realizar uma requisição GET para URL: `localhost:3000/login/validate`.
+  > - Para verificar o token, é necessário realizar uma requisição GET para URL: `localhost:3001/login/validate`.
   > ### Status:
   > - **`200`**: Retorna um json com a função da autenticação.
   > - **`401`**: Retorna um json com a mensagem de acesso não autorizado, no caso de ausencia do token ou falta de validade.
@@ -225,18 +225,18 @@
   # GET - localhost:3001/teams
 
   > - Rota responsável mostrar Todos times cadastrados
-  > - Para mostrar os times, é necessário realizar uma requisição GET para URL: `localhost:3000/teams`.
+  > - Para mostrar os times, é necessário realizar uma requisição GET para URL: `localhost:3001/teams`.
   > ### Status:
   > - **`200`**: Retorna um json com todos times cadastrados.
   > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
 
-  ## GET - `localhost:3000/teams/:id`
+  ## GET - `localhost:3001/teams/:id`
 
   > - Rota responsável buscar detalhes de uma time por seu id.
   > - Para buscar o time pelo id, é necessário realizar uma requisição GET com um parametros `id`.
   > ### Exemplo:
   >```
-  >localhost:3000/teams/1
+  >localhost:3001/teams/1
   >```
   > ### Status:
   > - **`200`**: Retorna um json com os detalhes do time.
@@ -254,10 +254,35 @@
   # GET - localhost:3001/matches
 
   > - Rota responsável mostrar todas partidas cadastradas com filtragem de partidas em progresso.
-  > - Para mostrar as partidas, é necessário realizar uma requisição GET para URL: `localhost:3000/matches`.
+  > - Para mostrar as partidas, é necessário realizar uma requisição GET para URL: `localhost:3001/matches`.
   > Caso deseje adicionar o filtro apresentando somente as partidas em progresso, basta adicionar um parametro inProgress true na rota: `localhost:3001/matches?inProgress=true`.
   > ### Status:
   > - **`200`**: Retorna um json com todas partidas cadastrados ou dentro do filtro desejado.
+  > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
+
+  # POST - localhost:3001/matches
+
+  > - Rota responsável cadastrar novas partidas.
+  > - É necessário adicionar ao headers o token para executar esta requisição.
+  > - Para cadastrar a partida, é necessário realizar uma requisição POST para URL: `localhost:3001/matches` contendo um corpo json com:
+  > - `homeTeam` ID correspondente ao time da casa.
+  > - `awayTeam` ID correspondente ao time visitante.
+  > - `homeTeamGoals` Valor númerico de quantidade de gols do time da casa.
+  > - `awayTeamGoals` Valor númerico de quantidade de gols do time visitante.
+    > ### Exemplo:
+  >```
+  >{
+  >  "homeTeam": 1,
+  >  "awayTeam": 2,
+  >  "homeTeamGoals": 0,
+  >  "awayTeamGoals": 1
+  >}
+  >```
+  > ### Status:
+  > - **`201`**: Retorna um json com os dados da partida cadastrada.
+  > - **`400`**: Retorna um json com a mensagem `All fields must be filled`.
+  > - **`401`**: Retorna um json com a mensagem `Missing Token`.
+  > - **`404`**: Retorna um json com a mensagem `There is no team with such id!`.
   > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
 
   </details>
