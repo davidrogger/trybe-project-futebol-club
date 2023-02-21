@@ -165,6 +165,49 @@
           }
         }
       }
+    },
+    "/matches/{id}": {
+      "patch": {
+        "tags": ["Matches"],
+        "summary": "Endpoint para atualização gols da partida.",
+        "description": "Rota responsável por atualizar quantidade de gols na partida.",
+        "parameters": [
+          {
+            "required": true,
+            "description": "ID referente a partida que deseja atualizar.",
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Deve ser enviado um corpo válido com `homeTeamGoals` e `awayTeamGoals` válidos.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGoals"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Atualização realizada com sucesso."
+          },
+          "400": {
+            "description": "Requisição fora do formato obrigatório."
+          },
+          "404": {
+            "description": "ID da partida não encontrado."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
     }
   },
   "components": {
@@ -213,6 +256,21 @@
             "type": "number",
             "description": "Quantidade de gols realizados pelo time visitante.",
             "example": "1"
+          }
+        }
+      },
+      "UpdateGoals": {
+        "type": "object",
+        "properties": {
+          "homeTeamGoals": {
+            "type": "number",
+            "description": "Deve ser um número positivo.",
+            "example": 2
+          },
+          "awayTeamGoals": {
+            "type": "number",
+            "description": "Deve ser um número positivo.",
+            "example": 1
           }
         }
       }
