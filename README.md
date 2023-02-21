@@ -326,7 +326,15 @@
   > - Rota responsável mostrar detalhes das partidas de todos times.
   > - Para mostrar os detalhes, é necessário realizar uma requisição GET para URL: `localhost:3001/leaderboard`.
   > ### Status:
-  > - **`200`**: Retorna um json com todas partidas cadastrados ou dentro do filtro desejado.
+  > - **`200`**: Retorna um json com detalhes de todos times.
+  > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
+
+  # GET - localhost:3001/leaderboard/home
+
+  > - Rota responsável mostrar detalhes das partidas dos times de casa.
+  > - Para mostrar os detalhes, é necessário realizar uma requisição GET para URL: `localhost:3001/leaderboard/home`.
+  > ### Status:
+  > - **`200`**: Retorna um json com detalhes somente dos times da casa.
   > - **`500`**: Retorna um json com a mensagem indicando o error que ocorreu internamente no servidor.
 
   </details>

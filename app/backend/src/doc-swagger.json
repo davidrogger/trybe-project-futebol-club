@@ -255,6 +255,21 @@
           }
         }
       }
+    },
+    "/leaderboard/home": {
+      "get": {
+        "tags": ["Leaderboard"],
+        "summary": "Endpoint mostra detalhes dos times da casa.",
+        "description": "Rota responsável por mostrar detalhes dos times da casa durante as partidas.",
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso."
+          },
+          "500": {
+            "description": "Falha interna com o servidor."
+          }
+        }
+      }
     }
   },
   "components": {
