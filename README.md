@@ -180,6 +180,7 @@
   >Para acessar e testar as rotas:
   >1. Usando algum API Cliente, conforme citado nas configurações mínimas.
   >2. Acessando a documentação gerada pelo swagger `localhost:3001/api-docs`.
+  >3. Acessando a URL do frontend desenvolvido pela trybe `localhost:3000`.
 
   <details>
   <summary>
